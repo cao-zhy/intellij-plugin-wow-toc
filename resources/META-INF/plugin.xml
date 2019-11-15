@@ -34,6 +34,7 @@
         <!-- Add your extensions here -->
         <fileType name="Toc file" implementationClass="com.github.czy211.wowtoc.TocFileType" fieldName="INSTANCE"
                   language="Toc" extensions="toc"/>
+        <lang.parserDefinition language="Toc" implementationClass="com.github.czy211.wowtoc.TocParserDefinition"/>
     </extensions>
 
     <actions>
