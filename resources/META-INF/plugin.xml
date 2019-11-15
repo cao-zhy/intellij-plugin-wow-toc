@@ -32,6 +32,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <fileType name="Toc file" implementationClass="com.github.czy211.wowtoc.TocFileType" fieldName="INSTANCE"
+                  language="Toc" extensions="toc"/>
     </extensions>
 
     <actions>
