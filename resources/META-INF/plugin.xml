@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>com.github.czy211.wowtoc</id>
+    <name>WoW TOC Support</name>
+    <version>1.0.0</version>
+    <vendor email="czy211@hotmail.com" url="https://github.com/czy211">czy211</vendor>
+
+    <description>
+        <![CDATA[
+            <p>Add support for World of Warcraft addons .toc file.</p>
+            <a href="https://github.com/czy211/wow-toc">Source Code</a>
+        ]]>
+    </description>
+
+    <change-notes>
+        <![CDATA[
+            <h3>v1.0.0</h3>
+            <ul>
+                <li>Syntax highlighting</li>
+                <li>Code completion</li>
+                <li>Comment</li>
+            </ul>
+        ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for
+         description -->
+    <idea-version since-build="192.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
