@@ -16,14 +16,14 @@ import com.intellij.psi.TokenType;
 %eof}
 
 CRLF=[\r|\n|\r\n]
-WHITE_SPACE=[ \t\f]
+WHITE_SPACE=[ ]
 SEPARATOR=:
 END_OF_LINE_COMMENT=("#"([^#].*|##.*))|([ ]+#.*)
 TAG_PREFIX="##"
 LOCALIZED=enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN
-TAG_NAME=Interface|Title(-{LOCALIZED})?|Notes(-{LOCALIZED})?|Description(-{LOCALIZED})?|RequiredDeps|Dependencies|Dep[^:\r\n\f]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariablesPerCharacter|SavedVariables|DefaultState|Secure|Author|Version|[Xx]-[^:\r\n\f]+
-FIRST_TAG_VALUE_CHARACTER=[^\n\f ]
-TAG_VALUE_CHARACTER=[^\n\f]
+TAG_NAME=Interface|Title(-{LOCALIZED})?|Notes(-{LOCALIZED})?|Description(-{LOCALIZED})?|RequiredDeps|Dependencies|Dep[^:\r\n]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariablesPerCharacter|SavedVariables|DefaultState|Secure|Author|Version|[Xx]-[^:\r\n]+
+FIRST_TAG_VALUE_CHARACTER=[^\r\n ]
+TAG_VALUE_CHARACTER=[^\r\n]
 FILE_NAME=[^#].*\.([lL][uU][aA]|[xX][mM][lL])
 
 %state WAITING_VALUE
