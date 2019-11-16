@@ -24,7 +24,7 @@ LOCALIZED=enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN
 TAG_NAME=Interface|Title(-{LOCALIZED})?|Notes(-{LOCALIZED})?|Description(-{LOCALIZED})?|RequiredDeps|Dependencies|Dep[^:\r\n]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariablesPerCharacter|SavedVariables|DefaultState|Secure|Author|Version|[Xx]-[^:\r\n]+
 FIRST_TAG_VALUE_CHARACTER=[^\r\n ]
 TAG_VALUE_CHARACTER=[^\r\n]
-FILE_NAME=[^#].*\.([lL][uU][aA]|[xX][mM][lL])
+FILE_NAME=[^:\r\n]*\.([lL][uU][aA]|[xX][mM][lL])
 
 %state WAITING_VALUE
 
