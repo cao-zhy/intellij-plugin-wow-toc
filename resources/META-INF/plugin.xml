@@ -35,6 +35,8 @@
         <fileType name="Toc file" implementationClass="com.github.czy211.wowtoc.TocFileType" fieldName="INSTANCE"
                   language="Toc" extensions="toc"/>
         <lang.parserDefinition language="Toc" implementationClass="com.github.czy211.wowtoc.TocParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="Toc"
+                                       implementationClass="com.github.czy211.wowtoc.TocSyntaxHighlighterFactory"/>
     </extensions>
 
     <actions>
