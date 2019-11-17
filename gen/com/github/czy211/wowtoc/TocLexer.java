@@ -21,20 +21,23 @@ class TocLexer implements FlexLexer {
   public static final int YYEOF = -1;
     /** lexical states */
   public static final int YYINITIAL = 0;
+    public static final int WAITING_TAG_NAME = 2;
+    public static final int WAITING_SEPARATOR = 4;
+    public static final int WAITING_TAG_VALUE = 6;
+    public static final int WAITING_CRLF = 8;
   /* The ZZ_CMAP_Z table has 272 entries */
   static final char[] ZZ_CMAP_Z = zzUnpackCMap(
           "\1\0\1\100\1\200\u010d\100");
-    public static final int WAITING_VALUE = 2;
   /* The ZZ_CMAP_Y table has 192 entries */
   static final char[] ZZ_CMAP_Y = zzUnpackCMap(
           "\1\0\1\1\1\2\175\3\1\4\77\3");
   /* The ZZ_CMAP_A table has 320 entries */
   static final char[] ZZ_CMAP_A = zzUnpackCMap(
-          "\12\0\1\5\2\6\1\5\22\0\1\2\2\0\1\4\11\0\1\50\1\64\13\0\1\3\6\0\1\62\1\14\1" +
-                  "\43\1\22\1\23\1\17\1\13\1\0\1\31\1\0\1\37\1\53\1\25\1\44\1\52\1\61\1\0\1\20" +
-                  "\1\12\1\32\1\11\1\57\1\42\1\26\10\0\1\45\1\60\1\46\1\21\1\7\1\15\1\55\1\41" +
-                  "\1\27\1\0\1\35\1\47\1\54\1\10\1\36\1\33\1\51\1\16\1\24\1\30\1\34\1\56\1\0" +
-                  "\1\63\1\0\1\40\1\0\1\1\10\0\1\6\242\0\2\6\26\0");
+          "\12\0\1\4\1\6\1\7\1\5\22\0\1\2\2\0\1\3\11\0\1\51\1\66\13\0\1\53\6\0\1\64\1" +
+                  "\15\1\44\1\23\1\24\1\20\1\14\1\0\1\32\1\0\1\40\1\55\1\26\1\45\1\54\1\63\1" +
+                  "\0\1\21\1\13\1\33\1\12\1\61\1\43\1\27\10\0\1\46\1\62\1\47\1\22\1\10\1\16\1" +
+                  "\57\1\42\1\30\1\0\1\36\1\50\1\56\1\11\1\37\1\34\1\52\1\17\1\25\1\31\1\35\1" +
+                  "\60\1\0\1\65\1\0\1\41\1\0\1\1\10\0\1\6\242\0\2\6\26\0");
     /** initial size of the lookahead buffer */
   private static final int ZZ_BUFFERSIZE = 16384;
   /**
@@ -44,213 +47,105 @@ class TocLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int[] ZZ_LEXSTATE = {
-          0,  0,  1, 1
+          0, 0, 1, 1, 2, 2, 3, 3, 4, 4
   };
-  private static final String ZZ_ACTION_PACKED_0 =
-          "\2\0\1\1\2\2\1\3\1\1\1\2\14\1\2\4" +
-                  "\1\5\2\0\2\6\1\7\23\0\1\10\25\0\1\11" +
-                  "\6\0\1\10\6\0\1\10\105\0\1\10\12\0";
-  /**
-   * Translates DFA states to action switch labels.
-   */
-  private static final int[] ZZ_ACTION = zzUnpackAction();
+    private static final String ZZ_ACTION_PACKED_0 =
+            "\4\0\1\1\1\2\1\1\1\2\1\3\1\1\1\2" +
+                    "\1\4\13\2\1\5\1\6\1\7\1\10\1\1\3\0" +
+                    "\2\3\1\11\24\0\1\12\24\0\1\13\5\0\1\12" +
+                    "\6\0\1\12\100\0\1\12\12\0";
+    /**
+     * Translates DFA states to action switch labels.
+     */
+    private static final int[] ZZ_ACTION = zzUnpackAction();
   private static final String ZZ_ROWMAP_PACKED_0 =
-          "\0\0\0\65\0\152\0\237\0\324\0\u0109\0\u013e\0\u0173" +
-                  "\0\u01a8\0\u01dd\0\u0212\0\u0247\0\u027c\0\u02b1\0\u02e6\0\u031b" +
-                  "\0\u0350\0\u0385\0\u03ba\0\u03ef\0\u0424\0\u0459\0\u048e\0\152" +
-                  "\0\u03ef\0\u04c3\0\u04f8\0\u052d\0\u0562\0\u0597\0\u05cc\0\u0601" +
-                  "\0\u0636\0\u066b\0\u06a0\0\u06d5\0\u070a\0\u073f\0\u0774\0\u07a9" +
-                  "\0\u07de\0\u0813\0\u0848\0\u087d\0\u08b2\0\u08e7\0\u091c\0\u0636" +
-                  "\0\u0951\0\u0986\0\u09bb\0\u09f0\0\u0a25\0\u0a5a\0\u0a8f\0\u0ac4" +
-                  "\0\u0af9\0\u0b2e\0\u0b63\0\u0b98\0\u0bcd\0\u0c02\0\u0c37\0\u0c6c" +
-                  "\0\u0ca1\0\u0cd6\0\u0d0b\0\u0d40\0\u0d75\0\152\0\u0daa\0\u0ddf" +
-                  "\0\u0e14\0\u0e49\0\u0e7e\0\u0eb3\0\u0ee8\0\u0f1d\0\u0f52\0\u0f87" +
-                  "\0\u0fbc\0\u0ff1\0\u1026\0\152\0\u105b\0\u1090\0\u10c5\0\u10fa" +
-                  "\0\u112f\0\u1164\0\u1199\0\u11ce\0\u1203\0\u1238\0\u126d\0\u12a2" +
-                  "\0\u12d7\0\u130c\0\u1341\0\u1376\0\u13ab\0\u13e0\0\u1415\0\u144a" +
-                  "\0\u147f\0\u14b4\0\u14e9\0\u151e\0\u1553\0\u1588\0\u15bd\0\u15f2" +
-                  "\0\u1627\0\u165c\0\u1691\0\u16c6\0\u16fb\0\u1730\0\u1765\0\u179a" +
-                  "\0\u17cf\0\u1804\0\u1839\0\u186e\0\u18a3\0\u18d8\0\u190d\0\u1942" +
-                  "\0\u1977\0\u19ac\0\u19e1\0\u1a16\0\u1a4b\0\u1a80\0\u1ab5\0\u1aea" +
-                  "\0\u1b1f\0\u1b54\0\u1b89\0\u1bbe\0\u1bf3\0\u1c28\0\u1c5d\0\u1c92" +
-                  "\0\u1cc7\0\u1cfc\0\u1d31\0\u1d66\0\u1d9b\0\u1dd0\0\u1e05\0\u1e3a" +
-                  "\0\u1e6f\0\u1ea4\0\u1ed9\0\u1f0e\0\u1f43\0\u1f78\0\u1fad\0\u1fe2" +
-                  "\0\u2017\0\u204c\0\u2081\0\u20b6";
+          "\0\0\0\67\0\156\0\245\0\334\0\u0113\0\u014a\0\u0181" +
+                  "\0\u01b8\0\u01ef\0\u0226\0\u025d\0\u0294\0\u02cb\0\u0302\0\u0339" +
+                  "\0\u0370\0\u03a7\0\u03de\0\u0415\0\u044c\0\u0483\0\u04ba\0\u04f1" +
+                  "\0\u0226\0\u0528\0\u055f\0\u0596\0\u0113\0\u05cd\0\u0181\0\u0604" +
+                  "\0\u063b\0\u0672\0\u06a9\0\u06e0\0\u0717\0\u074e\0\u0785\0\u07bc" +
+                  "\0\u07f3\0\u082a\0\u0861\0\u0898\0\u08cf\0\u0906\0\u0528\0\u093d" +
+                  "\0\u0974\0\u0672\0\u09ab\0\u09e2\0\u0a19\0\u0a50\0\u0785\0\u0a87" +
+                  "\0\u0abe\0\u0af5\0\u0b2c\0\u0b63\0\u0b9a\0\u0bd1\0\u0c08\0\u0c3f" +
+                  "\0\u0c76\0\u0cad\0\u0ce4\0\u0d1b\0\u0d52\0\u0d89\0\u0dc0\0\u0df7" +
+                  "\0\u0e2e\0\u0e65\0\u0e9c\0\u0113\0\u0ed3\0\u0f0a\0\u0f41\0\u0f78" +
+                  "\0\u0faf\0\u0fe6\0\u101d\0\u1054\0\u108b\0\u10c2\0\u10f9\0\u1130" +
+                  "\0\u0226\0\u1167\0\u119e\0\u11d5\0\u120c\0\u1243\0\u127a\0\u12b1" +
+                  "\0\u12e8\0\u131f\0\u1356\0\u138d\0\u13c4\0\u13fb\0\u1432\0\u1469" +
+                  "\0\u14a0\0\u14d7\0\u150e\0\u1545\0\u157c\0\u15b3\0\u15ea\0\u1621" +
+                  "\0\u1658\0\u168f\0\u16c6\0\u16fd\0\u1734\0\u176b\0\u17a2\0\u17d9" +
+                  "\0\u1810\0\u1847\0\u187e\0\u18b5\0\u18ec\0\u1923\0\u195a\0\u1991" +
+                  "\0\u19c8\0\u19ff\0\u1a36\0\u1a6d\0\u1aa4\0\u1adb\0\u1b12\0\u1b49" +
+                  "\0\u1b80\0\u1bb7\0\u1bee\0\u1c25\0\u1c5c\0\u1c93\0\u1cca\0\u1d01" +
+                  "\0\u1d38\0\u1d6f\0\u1da6\0\u1ddd\0\u1e14\0\u1e4b\0\u1e82\0\u1eb9" +
+                  "\0\u1ef0\0\u1f27\0\u1f5e\0\u1f95\0\u1fcc\0\u2003\0\u203a\0\u2071" +
+                  "\0\u20a8\0\u20df\0\u2116\0\u214d";
   /**
    * Translates a state to a row index in the transition table
    */
   private static final int[] ZZ_ROWMAP = zzUnpackRowMap();
   private static final String ZZ_TRANS_PACKED_0 =
-          "\1\3\1\4\1\5\1\6\1\7\1\10\4\3\1\11" +
-                  "\5\3\1\12\1\3\1\13\3\3\1\14\2\3\1\15" +
-                  "\1\16\11\3\1\17\5\3\1\20\1\21\3\3\1\22" +
-                  "\2\3\1\23\1\14\1\24\1\25\1\26\1\27\2\25" +
-                  "\1\10\57\25\3\30\1\0\1\30\1\0\56\30\1\31" +
-                  "\1\30\1\4\1\30\1\0\1\30\1\10\56\30\1\31" +
-                  "\2\30\1\5\1\0\1\32\1\0\56\30\1\31\65\0" +
-                  "\3\32\1\33\1\34\1\33\57\32\1\0\1\10\3\0" +
-                  "\1\10\57\0\3\30\1\0\1\30\1\0\1\30\1\35" +
-                  "\35\30\1\36\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\37\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\40\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\42\30\1\41\13\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\2\30\1\42\53\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\21\30\1\43\34\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\30\30\1\44\25\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\25\30\1\45\30\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\30\30\1\46\25\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\47\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\26\30\1\50\27\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\20\30\1\51\20\30\1\52\3\30\1\52\7\30\1\51" +
-                  "\1\31\5\25\1\0\60\25\1\26\3\25\1\10\57\25" +
-                  "\2\0\1\27\62\0\3\32\1\33\1\32\1\0\1\30" +
-                  "\56\32\5\33\2\0\56\33\3\30\1\0\1\32\1\0" +
-                  "\56\30\1\31\3\30\1\0\1\30\1\0\40\30\1\53" +
-                  "\15\30\1\31\3\30\1\0\1\30\1\0\50\30\1\54" +
-                  "\5\30\1\31\3\30\1\0\1\30\1\0\43\30\1\55" +
-                  "\12\30\1\31\3\30\1\0\1\30\1\0\7\30\1\56" +
-                  "\6\30\1\57\6\30\1\41\30\30\1\31\3\60\1\0" +
-                  "\1\60\1\0\57\60\3\30\1\0\1\30\1\0\22\30" +
-                  "\1\61\33\30\1\31\3\30\1\0\1\30\1\0\22\30" +
-                  "\1\62\33\30\1\31\3\30\1\0\1\30\1\0\22\30" +
-                  "\1\63\33\30\1\31\3\30\1\0\1\30\1\0\22\30" +
-                  "\1\64\33\30\1\31\3\30\1\0\1\30\1\0\37\30" +
-                  "\1\65\16\30\1\31\3\30\1\0\1\30\1\0\10\30" +
-                  "\1\66\45\30\1\31\3\30\1\0\1\30\1\0\22\30" +
-                  "\1\67\33\30\1\31\3\30\1\0\1\30\1\0\17\30" +
-                  "\1\70\26\30\1\70\7\30\1\31\3\30\1\0\1\30" +
-                  "\1\0\3\30\1\71\22\30\1\71\27\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\26\30\1\72\27\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\1\30\1\73\54\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\26\30\1\74\27\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\37\30\1\75\16\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\40\30\1\76\15\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\1\30\1\77\54\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\41\30\1\100\14\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\1\30\1\101\54\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\21\30\1\102\34\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\13\30\1\103\42\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\16\30\1\104\37\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\33\30\1\105\22\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\41\30\1\106\3\30\1\106\10\30" +
-                  "\1\31\3\30\1\0\1\30\1\0\37\30\1\106\14\30" +
-                  "\1\106\1\30\1\31\3\30\1\0\1\30\1\0\10\30" +
-                  "\1\107\45\30\1\31\3\30\1\0\1\30\1\0\13\30" +
-                  "\1\110\42\30\1\31\3\30\1\0\1\30\1\0\21\30" +
-                  "\1\111\34\30\1\31\3\30\1\0\1\30\1\0\26\30" +
-                  "\1\112\27\30\1\31\3\30\1\0\1\30\1\0\10\30" +
-                  "\1\113\45\30\1\31\3\30\1\0\1\30\1\0\10\30" +
-                  "\1\114\45\30\1\31\3\30\1\0\1\30\1\0\1\30" +
-                  "\1\115\54\30\1\31\3\30\1\0\1\30\1\0\16\30" +
-                  "\1\115\37\30\1\31\3\30\1\0\1\30\1\0\30\30" +
-                  "\1\116\25\30\1\31\3\30\1\0\1\30\1\0\17\30" +
-                  "\1\117\14\30\1\120\7\30\1\121\11\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\21\30\1\122\34\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\30\30\1\123\25\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\1\30\1\124\54\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\51\30\1\125\4\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\10\30\1\126\45\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\41\30\1\127\14\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\21\30\1\130\34\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\7\30\1\131\46\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\42\30\1\132\13\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\2\30\1\133\53\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\37\30\1\134\16\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\21\30\1\135\34\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\2\30\1\136\53\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\30\30\1\137\25\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\10\30\1\124\45\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\37\30\1\140\16\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\1\30\1\141\54\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\22\30\1\142\33\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\25\30\1\143\30\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\37\30\1\144\16\30\1\31\3\30" +
-                  "\1\0\1\30\1\0\1\30\1\145\5\30\1\146\1\147" +
-                  "\2\30\1\150\5\30\1\151\3\30\1\152\1\30\1\153" +
-                  "\2\30\1\154\23\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\37\30\1\155\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\2\30\1\156\53\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\22\30\1\157\33\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\14\30\1\160\41\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\2\30\1\124\53\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\10\30\1\161\45\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\13\30\1\162\42\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\4\30\1\163\51\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\22\30\1\164\33\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\40\30\1\107\15\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\2\30\1\165\13\30\1\166\37\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\10\30\1\167\45\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\26\30\1\170\27\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\1\30\1\171\54\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\22\30\1\172\33\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\22\30\1\173\33\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\30\30\1\174\25\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\33\30\1\175\22\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\41\30\1\162\14\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\37\30\1\176\16\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\33\30\1\124\22\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\1\30\1\177\54\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\21\30\1\200\34\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\14\30\1\201\41\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\22\30\1\202\33\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\21\30\1\203\34\30\1\31\3\30\1\0" +
-                  "\1\30\1\0\3\30\1\204\1\30\1\205\50\30\1\31" +
-                  "\3\30\1\0\1\30\1\0\15\30\1\204\1\30\1\206" +
-                  "\36\30\1\31\3\30\1\0\1\30\1\0\11\30\1\207" +
-                  "\44\30\1\31\3\30\1\0\1\30\1\0\12\30\1\210" +
-                  "\43\30\1\31\3\30\1\0\1\30\1\0\14\30\1\211" +
-                  "\41\30\1\31\3\30\1\0\1\30\1\0\23\30\1\212" +
-                  "\32\30\1\31\3\30\1\0\1\30\1\0\6\30\1\207" +
-                  "\47\30\1\31\3\30\1\0\1\30\1\0\31\30\1\207" +
-                  "\24\30\1\31\3\30\1\0\1\30\1\0\24\30\1\213" +
-                  "\10\30\1\214\20\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\47\30\1\215\6\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\46\30\1\216\7\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\37\30\1\217\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\220\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\37\30\1\221\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\30\30\1\222\25\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\4\30\1\124\51\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\6\30\1\124\47\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\20\30\1\124\35\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\12\30\1\124\43\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\3\30\1\124\52\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\15\30\1\124\40\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\24\30\1\124\31\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\34\30\1\124\21\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\36\30\1\124\17\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\223\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\37\30\1\224\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\52\30\1\225\3\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\25\30\1\226\30\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\22\30\1\107\33\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\2\30\1\115\53\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\10\30\1\226\45\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\2\30\1\227\53\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\41\30\1\230\14\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\16\30\1\124\37\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\13\30\1\124\42\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\231\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\16\30\1\232\37\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\53\30\1\233\2\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\234\54\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\10\30\1\235\45\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\35\30\1\236\20\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\33\30\1\237\22\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\37\30\1\240\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\10\30\1\241\45\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\37\30\1\242\16\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\40\30\1\243\15\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\22\30\1\244\33\30\1\31\3\30\1\0\1\30\1\0" +
-                  "\1\30\1\123\54\30\1\31";
+          "\1\6\1\7\1\10\1\11\1\12\1\7\1\6\1\13" +
+                  "\57\6\2\13\1\14\10\13\1\15\5\13\1\16\1\13" +
+                  "\1\17\3\13\1\20\2\13\1\21\1\22\11\13\1\23" +
+                  "\6\13\1\24\1\25\3\13\1\26\2\13\1\27\1\20" +
+                  "\3\13\1\30\50\13\1\31\13\13\2\32\1\33\1\32" +
+                  "\1\13\2\32\1\13\57\32\1\13\1\12\1\34\1\13" +
+                  "\2\12\61\13\4\35\4\0\56\35\1\36\1\35\1\7" +
+                  "\2\35\2\12\2\0\56\35\1\36\2\35\1\37\1\40" +
+                  "\1\0\2\35\1\0\57\35\3\41\1\42\63\41\1\0" +
+                  "\1\12\2\0\2\12\152\0\1\14\74\0\1\43\35\0" +
+                  "\1\44\30\0\1\45\66\0\1\46\127\0\1\47\26\0" +
+                  "\1\50\105\0\1\51\75\0\1\52\63\0\1\53\71\0" +
+                  "\1\54\37\0\1\55\113\0\1\56\33\0\1\30\64\0" +
+                  "\2\32\1\57\1\32\1\0\2\32\1\0\57\32\2\0" +
+                  "\1\33\65\0\1\12\1\34\1\0\2\12\61\0\4\35" +
+                  "\4\0\16\35\1\60\21\35\1\61\4\35\1\61\7\35" +
+                  "\1\60\1\36\3\41\1\62\67\41\4\0\57\41\3\0" +
+                  "\1\41\132\0\1\63\77\0\1\64\60\0\1\65\32\0" +
+                  "\1\66\15\0\1\47\32\0\2\67\1\0\1\67\1\0" +
+                  "\2\67\1\0\43\67\1\0\13\67\31\0\1\70\66\0" +
+                  "\1\71\66\0\1\72\66\0\1\73\103\0\1\74\37\0" +
+                  "\1\75\100\0\1\76\35\0\4\35\4\0\16\35\1\77" +
+                  "\27\35\1\77\7\35\1\36\4\35\4\0\2\35\1\100" +
+                  "\22\35\1\100\30\35\1\36\35\0\1\101\41\0\1\102" +
+                  "\113\0\1\103\77\0\1\104\30\0\1\105\126\0\1\106" +
+                  "\26\0\1\107\106\0\1\110\60\0\1\111\71\0\1\112" +
+                  "\103\0\1\113\24\0\4\35\4\0\40\35\1\114\4\35" +
+                  "\1\114\10\35\1\36\4\35\4\0\36\35\1\114\15\35" +
+                  "\1\114\1\35\1\36\17\0\1\115\71\0\1\116\74\0" +
+                  "\1\117\73\0\1\120\50\0\1\121\57\0\1\122\103\0" +
+                  "\1\122\100\0\1\123\55\0\1\124\14\0\1\125\10\0" +
+                  "\1\126\42\0\1\127\75\0\1\130\37\0\1\131\137\0" +
+                  "\1\132\24\0\1\133\117\0\1\134\34\0\1\135\121\0" +
+                  "\1\136\26\0\1\137\123\0\1\140\50\0\1\141\47\0" +
+                  "\1\142\114\0\1\143\46\0\1\131\115\0\1\144\30\0" +
+                  "\1\145\107\0\1\146\103\0\1\147\30\0\1\150\5\0" +
+                  "\1\151\1\152\2\0\1\153\5\0\1\154\3\0\1\155" +
+                  "\1\0\1\156\2\0\1\157\73\0\1\160\31\0\1\161" +
+                  "\106\0\1\162\60\0\1\163\54\0\1\131\74\0\1\164" +
+                  "\71\0\1\165\57\0\1\166\122\0\1\115\30\0\1\167" +
+                  "\13\0\1\170\60\0\1\171\104\0\1\172\41\0\1\173" +
+                  "\107\0\1\174\66\0\1\175\74\0\1\176\71\0\1\177" +
+                  "\74\0\1\165\64\0\1\200\62\0\1\131\34\0\1\201" +
+                  "\106\0\1\202\61\0\1\203\74\0\1\204\47\0\1\205" +
+                  "\1\0\1\206\76\0\1\205\1\0\1\207\60\0\1\210" +
+                  "\67\0\1\211\70\0\1\212\75\0\1\213\51\0\1\210" +
+                  "\111\0\1\210\61\0\1\214\10\0\1\215\101\0\1\216" +
+                  "\65\0\1\217\56\0\1\220\30\0\1\221\124\0\1\222" +
+                  "\33\0\1\131\70\0\1\131\100\0\1\131\60\0\1\131" +
+                  "\57\0\1\131\100\0\1\131\75\0\1\131\76\0\1\131" +
+                  "\70\0\1\131\31\0\1\223\124\0\1\224\102\0\1\225" +
+                  "\40\0\1\226\63\0\1\115\54\0\1\226\60\0\1\227" +
+                  "\125\0\1\230\43\0\1\131\63\0\1\131\54\0\1\231" +
+                  "\103\0\1\232\124\0\1\233\13\0\1\234\75\0\1\235" +
+                  "\113\0\1\236\64\0\1\237\72\0\1\240\37\0\1\241" +
+                  "\115\0\1\242\67\0\1\243\50\0\1\244\45\0\1\130"+
+    "\56\0";
   /**
    * The transition table of the DFA
    */
   private static final int[] ZZ_TRANS = zzUnpackTrans();
-  /* error codes */
-  private static final int ZZ_UNKNOWN_ERROR = 0;
-  private static final int ZZ_NO_MATCH = 1;
-  private static final int ZZ_PUSHBACK_2BIG = 2;
   /* error messages for the codes above */
   private static final String[] ZZ_ERROR_MSG = {
           "Unknown internal scanner error",
@@ -258,9 +153,9 @@ class TocLexer implements FlexLexer {
           "Error: pushback value was too large"
   };
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-          "\2\0\3\1\1\11\21\1\2\0\3\1\23\0\1\1" +
-                  "\25\0\1\1\6\0\1\1\6\0\1\1\105\0\1\1" +
-                  "\12\0";
+          "\4\0\6\1\1\11\15\1\1\11\3\1\3\0\3\1" +
+                  "\24\0\1\1\24\0\1\1\5\0\1\1\6\0\1\11" +
+                  "\100\0\1\1\12\0";
   /**
    * ZZ_ATTRIBUTE[aState] contains the attributes of state <code>aState</code>
    */
@@ -274,6 +169,12 @@ class TocLexer implements FlexLexer {
     /** this buffer contains the current text to be matched and is
      the source of the yytext() string */
   private CharSequence zzBuffer = "";
+
+
+    /* error codes */
+    private static final int ZZ_UNKNOWN_ERROR = 0;
+    private static final int ZZ_NO_MATCH = 1;
+    private static final int ZZ_PUSHBACK_2BIG = 2;
     /** the textposition at the last accepting state */
   private int zzMarkedPos;
     /** the current text position in the buffer */
@@ -283,14 +184,101 @@ class TocLexer implements FlexLexer {
     /** endRead marks the last character in the buffer, that has been read
      from input */
   private int zzEndRead;
-  /**
-   * zzAtBOL == true <=> the scanner is currently at the beginning of a line
-   */
-  private boolean zzAtBOL = true;
     /** zzAtEOF == true <=> the scanner is at the EOF */
   private boolean zzAtEOF;
     /** denotes if the user-EOF-code has already been executed */
   private boolean zzEOFDone;
+
+    /**
+     * Translates characters to character classes
+     * Chosen bits are [9, 6, 6]
+     * Total runtime size is 1568 bytes
+     */
+    public static int ZZ_CMAP(int ch) {
+        return ZZ_CMAP_A[(ZZ_CMAP_Y[ZZ_CMAP_Z[ch >> 12] | ((ch >> 6) & 0x3f)] << 6) | (ch & 0x3f)];
+    }
+
+    private static int[] zzUnpackAction() {
+        int[] result = new int[164];
+        int offset = 0;
+        offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
+        return result;
+    }
+
+    private static int zzUnpackAction(String packed, int offset, int[] result) {
+        int i = 0;       /* index in packed string  */
+        int j = offset;  /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            do result[j++] = value; while (--count > 0);
+        }
+        return j;
+    }
+
+    private static int[] zzUnpackRowMap() {
+        int[] result = new int[164];
+        int offset = 0;
+        offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
+        return result;
+    }
+
+    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
+        int i = 0;  /* index in packed string  */
+        int j = offset;  /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int high = packed.charAt(i++) << 16;
+            result[j++] = high | packed.charAt(i++);
+        }
+        return j;
+    }
+
+    private static int[] zzUnpackTrans() {
+        int[] result = new int[8580];
+        int offset = 0;
+        offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
+        return result;
+    }
+
+    private static int zzUnpackTrans(String packed, int offset, int[] result) {
+        int i = 0;       /* index in packed string  */
+        int j = offset;  /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            value--;
+            do result[j++] = value; while (--count > 0);
+        }
+        return j;
+    }
+
+    /**
+     * zzAtBOL == true <=> the scanner is currently at the beginning of a line
+     */
+    private boolean zzAtBOL = true;
+
+    private static int[] zzUnpackAttribute() {
+        int[] result = new int[164];
+        int offset = 0;
+        offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
+        return result;
+    }
+
+    private static int zzUnpackAttribute(String packed, int offset, int[] result) {
+        int i = 0;       /* index in packed string  */
+        int j = offset;  /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            do result[j++] = value; while (--count > 0);
+        }
+        return j;
+    }
+
 
   /**
    * Creates a new scanner
@@ -299,91 +287,6 @@ class TocLexer implements FlexLexer {
    */
   TocLexer(java.io.Reader in) {
     this.zzReader = in;
-  }
-
-  /**
-   * Translates characters to character classes
-   * Chosen bits are [9, 6, 6]
-   * Total runtime size is 1568 bytes
-   */
-  public static int ZZ_CMAP(int ch) {
-      return ZZ_CMAP_A[(ZZ_CMAP_Y[ZZ_CMAP_Z[ch >> 12] | ((ch >> 6) & 0x3f)] << 6)|(ch&0x3f)];
-  }
-
-    private static int[] zzUnpackAction() {
-        int[] result = new int[164];
-    int offset = 0;
-    offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
-    return result;
-    }
-
-    private static int zzUnpackAction(String packed, int offset, int[] result) {
-    int i = 0;       /* index in packed string  */
-    int j = offset;  /* index in unpacked array */
-    int l = packed.length();
-    while (i < l) {
-      int count = packed.charAt(i++);
-      int value = packed.charAt(i++);
-      do result[j++] = value; while (--count > 0);
-    }
-    return j;
-    }
-
-    private static int[] zzUnpackRowMap() {
-        int[] result = new int[164];
-    int offset = 0;
-    offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
-    return result;
-    }
-
-    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
-    int i = 0;  /* index in packed string  */
-    int j = offset;  /* index in unpacked array */
-    int l = packed.length();
-    while (i < l) {
-      int high = packed.charAt(i++) << 16;
-      result[j++] = high | packed.charAt(i++);
-    }
-    return j;
-    }
-
-    private static int[] zzUnpackTrans() {
-        int[] result = new int[8427];
-    int offset = 0;
-    offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
-    return result;
-    }
-
-    private static int zzUnpackTrans(String packed, int offset, int[] result) {
-    int i = 0;       /* index in packed string  */
-    int j = offset;  /* index in unpacked array */
-    int l = packed.length();
-    while (i < l) {
-      int count = packed.charAt(i++);
-      int value = packed.charAt(i++);
-      value--;
-      do result[j++] = value; while (--count > 0);
-    }
-    return j;
-    }
-
-    private static int[] zzUnpackAttribute() {
-        int[] result = new int[164];
-    int offset = 0;
-    offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
-    return result;
-    }
-
-    private static int zzUnpackAttribute(String packed, int offset, int[] result) {
-    int i = 0;       /* index in packed string  */
-    int j = offset;  /* index in unpacked array */
-    int l = packed.length();
-    while (i < l) {
-      int count = packed.charAt(i++);
-      int value = packed.charAt(i++);
-      do result[j++] = value; while (--count > 0);
-    }
-    return j;
   }
 
   /**
@@ -419,7 +322,7 @@ class TocLexer implements FlexLexer {
   public void reset(CharSequence buffer, int start, int end, int initialState) {
     zzBuffer = buffer;
     zzCurrentPos = zzMarkedPos = zzStartRead = start;
-      zzAtEOF  = false;
+    zzAtEOF  = false;
     zzAtBOL = true;
     zzEndRead = end;
     yybegin(initialState);
@@ -483,7 +386,7 @@ class TocLexer implements FlexLexer {
    * Returns the length of the matched text region.
    */
   public final int yylength() {
-      return zzMarkedPos -zzStartRead;
+      return zzMarkedPos-zzStartRead;
   }
 
 
@@ -522,7 +425,7 @@ class TocLexer implements FlexLexer {
    *                This number must not be greater than yylength()!
    */
   public void yypushback(int number) {
-      if (number > yylength() )
+      if ( number > yylength() )
       zzScanError(ZZ_PUSHBACK_2BIG);
 
     zzMarkedPos -= number;
@@ -560,7 +463,7 @@ class TocLexer implements FlexLexer {
 
       int[] zzTransL = ZZ_TRANS;
       int[] zzRowMapL = ZZ_ROWMAP;
-      int[] zzAttrL = ZZ_ATTRIBUTE;
+      int [] zzAttrL = ZZ_ATTRIBUTE;
 
     while (true) {
       zzMarkedPosL = zzMarkedPos;
@@ -573,12 +476,12 @@ class TocLexer implements FlexLexer {
 
       // set up zzAction for empty match case:
       int zzAttributes = zzAttrL[zzState];
-        if ((zzAttributes & 1) == 1 ) {
-        zzAction = zzState;
+        if ( (zzAttributes & 1) == 1 ) {
+            zzAction = zzState;
         }
 
 
-        zzForAction: {
+      zzForAction: {
         while (true) {
 
           if (zzCurrentPosL < zzEndReadL) {
@@ -586,21 +489,23 @@ class TocLexer implements FlexLexer {
             zzCurrentPosL += Character.charCount(zzInput);
           } else if (zzAtEOF) {
             zzInput = YYEOF;
-            break zzForAction;
-          } else {
+              break zzForAction;
+          }
+          else {
             // store back cached positions
               zzCurrentPos = zzCurrentPosL;
-              zzMarkedPos = zzMarkedPosL;
+              zzMarkedPos   = zzMarkedPosL;
             boolean eof = zzRefill();
             // get translated positions and possibly new buffer
               zzCurrentPosL = zzCurrentPos;
               zzMarkedPosL = zzMarkedPos;
               zzBufferL = zzBuffer;
-              zzEndReadL = zzEndRead;
+              zzEndReadL     = zzEndRead;
             if (eof) {
               zzInput = YYEOF;
-              break zzForAction;
-            } else {
+                break zzForAction;
+            }
+            else {
               zzInput = Character.codePointAt(zzBufferL, zzCurrentPosL/*, zzEndReadL*/);
               zzCurrentPosL += Character.charCount(zzInput);
             }
@@ -610,10 +515,10 @@ class TocLexer implements FlexLexer {
           zzState = zzNext;
 
           zzAttributes = zzAttrL[zzState];
-            if ((zzAttributes & 1) == 1 ) {
+            if ( (zzAttributes & 1) == 1 ) {
             zzAction = zzState;
             zzMarkedPosL = zzCurrentPosL;
-                if ((zzAttributes & 8) == 8) break zzForAction;
+                if ((zzAttributes & 8) == 8 ) break zzForAction;
           }
 
         }
@@ -625,70 +530,81 @@ class TocLexer implements FlexLexer {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
         zzDoEOF();
-        return null;
-      } else {
+          return null;
+      }
+      else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
             case 1: {
-                return TokenType.BAD_CHARACTER;
-            }
-            // fall through
-            case 10:
-                break;
-            case 2: {
                 yybegin(YYINITIAL);
                 return TokenType.WHITE_SPACE;
-            }
-            // fall through
-            case 11:
-                break;
-            case 3: {
-                yybegin(WAITING_VALUE);
-                return TocTypes.SEPARATOR;
             }
             // fall through
             case 12:
                 break;
-            case 4: {
-                yybegin(WAITING_VALUE);
-                return TocTypes.TAG_VALUE;
+            case 2: {
+                return TokenType.BAD_CHARACTER;
             }
             // fall through
             case 13:
                 break;
-            case 5: {
-                yybegin(WAITING_VALUE);
-                return TokenType.WHITE_SPACE;
+            case 3: {
+                yybegin(YYINITIAL); return TocTypes.COMMENT;
             }
             // fall through
             case 14:
                 break;
-            case 6: {
-                yybegin(YYINITIAL);
-                return TocTypes.COMMENT;
+            case 4: {
+                yybegin(WAITING_TAG_NAME);
+                return TokenType.WHITE_SPACE;
             }
             // fall through
             case 15:
                 break;
-            case 7: {
-                yybegin(YYINITIAL);
-                return TocTypes.TAG_PREFIX;
+            case 5: {
+                yybegin(WAITING_SEPARATOR);
+                return TokenType.WHITE_SPACE;
             }
             // fall through
             case 16:
                 break;
-            case 8: {
-                yybegin(YYINITIAL);
-                return TocTypes.TAG_NAME;
+            case 6: {
+                yybegin(WAITING_TAG_VALUE); return TocTypes.SEPARATOR;
             }
             // fall through
             case 17:
                 break;
+            case 7: {
+                yybegin(WAITING_CRLF); return TocTypes.TAG_VALUE;
+            }
+            // fall through
+            case 18:
+                break;
+            case 8: {
+                yybegin(WAITING_TAG_VALUE);
+                return TokenType.WHITE_SPACE;
+            }
+            // fall through
+            case 19:
+                break;
             case 9: {
-                yybegin(WAITING_VALUE);
+                yybegin(WAITING_TAG_NAME); return TocTypes.TAG_PREFIX;
+            }
+            // fall through
+            case 20:
+                break;
+            case 10: {
+                yybegin(WAITING_SEPARATOR);
+                return TocTypes.TAG_NAME;
+            }
+            // fall through
+            case 21:
+                break;
+            case 11: {
+                yybegin(WAITING_CRLF);
                 return TocTypes.FILE_NAME;
             }
             // fall through
-            case 18: break;
+          case 22: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

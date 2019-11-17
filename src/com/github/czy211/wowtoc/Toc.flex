@@ -17,26 +17,30 @@ import com.intellij.psi.TokenType;
 
 CRLF=[\r|\n|\r\n]
 WHITE_SPACE=[ ]
+END_OF_LINE_COMMENT=[ ]*#|([ ]*#(##.*|[^#].*))
+TAG_PREFIX=##
+LOCALIZITION=enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN
+TAG_NAME=Interface|Title(-{LOCALIZITION})?|Notes(-{LOCALIZITION})?|RequiredDeps|Dependencies|Dep[^: \n\f]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariables|SavedVariablesPerCharacter|DefaultState|Secure|Author|Version|[Xx]-[^: \n\f]+
 SEPARATOR=:
-END_OF_LINE_COMMENT=("#"([^#].*|##.*))|([ ]+#.*)
-TAG_PREFIX="##"
-LOCALIZED=enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN
-TAG_NAME=Interface|Title(-{LOCALIZED})?|Notes(-{LOCALIZED})?|Description(-{LOCALIZED})?|RequiredDeps|Dependencies|Dep[^:\r\n]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariablesPerCharacter|SavedVariables|DefaultState|Secure|Author|Version|[Xx]-[^:\r\n]+
-FIRST_TAG_VALUE_CHARACTER=[^\r\n ]
-TAG_VALUE_CHARACTER=[^\r\n]
-FILE_NAME=[^:\r\n]*\.([lL][uU][aA]|[xX][mM][lL])
+TAG_VALUE=[^ \n\f]+|[^ \n\f][^\n\f]*[^ \n\f]
+FILE_NAME=[ ]*[^ #\n\f].*\.([lL][uU][aA]|[xM][mM][lL])
 
-%state WAITING_VALUE
+%state WAITING_TAG_NAME
+%state WAITING_SEPARATOR
+%state WAITING_TAG_VALUE
+%state WAITING_CRLF
 
 %%
 
+<YYINITIAL> {CRLF}+ {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
 <YYINITIAL> {END_OF_LINE_COMMENT} {yybegin(YYINITIAL); return TocTypes.COMMENT;}
-<YYINITIAL> {TAG_PREFIX} {yybegin(YYINITIAL); return TocTypes.TAG_PREFIX;}
-<YYINITIAL> {WHITE_SPACE}+ {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
-<YYINITIAL> {TAG_NAME} {yybegin(YYINITIAL); return TocTypes.TAG_NAME;}
-<YYINITIAL> {SEPARATOR} {yybegin(WAITING_VALUE); return TocTypes.SEPARATOR;}
-<YYINITIAL> {FILE_NAME} {yybegin(WAITING_VALUE); return TocTypes.FILE_NAME;}
-<WAITING_VALUE> {WHITE_SPACE}+ {yybegin(WAITING_VALUE); return TokenType.WHITE_SPACE;}
-<WAITING_VALUE> {FIRST_TAG_VALUE_CHARACTER}{TAG_VALUE_CHARACTER}* {yybegin(WAITING_VALUE); return TocTypes.TAG_VALUE;}
-{CRLF}+ {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
+<YYINITIAL> {TAG_PREFIX} {yybegin(WAITING_TAG_NAME); return TocTypes.TAG_PREFIX;}
+<YYINITIAL> {FILE_NAME} {yybegin(WAITING_CRLF); return TocTypes.FILE_NAME;}
+<WAITING_TAG_NAME> {WHITE_SPACE}+ {yybegin(WAITING_TAG_NAME); return TokenType.WHITE_SPACE;}
+<WAITING_TAG_NAME> {TAG_NAME} {yybegin(WAITING_SEPARATOR); return TocTypes.TAG_NAME;}
+<WAITING_SEPARATOR> {WHITE_SPACE}+ {yybegin(WAITING_SEPARATOR); return TokenType.WHITE_SPACE;}
+<WAITING_SEPARATOR> {SEPARATOR} {yybegin(WAITING_TAG_VALUE); return TocTypes.SEPARATOR;}
+<WAITING_TAG_VALUE> {WHITE_SPACE}+ {yybegin(WAITING_TAG_VALUE); return TokenType.WHITE_SPACE;}
+<WAITING_TAG_VALUE> {TAG_VALUE} {yybegin(WAITING_CRLF); return TocTypes.TAG_VALUE;}
+<WAITING_CRLF> {WHITE_SPACE}*{CRLF}* {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
 [^] {return TokenType.BAD_CHARACTER;}
