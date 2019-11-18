@@ -7,16 +7,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class TocVisitor extends PsiElementVisitor {
 
-    public void visitBody(@NotNull TocBody o) {
-        visitPsiElement(o);
-    }
+  public void visitRef(@NotNull TocRef o) {
+    visitPsiElement(o);
+  }
 
-    public void visitTag(@NotNull TocTag o) {
-        visitPsiElement(o);
-    }
+  public void visitTag(@NotNull TocTag o) {
+    visitPsiElement(o);
+  }
 
-    public void visitPsiElement(@NotNull PsiElement o) {
-        visitElement(o);
-    }
+  public void visitPsiElement(@NotNull PsiElement o) {
+    visitElement(o);
+  }
 
 }

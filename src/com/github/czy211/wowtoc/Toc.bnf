@@ -15,8 +15,8 @@
 
 simpleFile ::= item_*
 
-private item_ ::= (tag|body|COMMENT|CRLF)
+private item_ ::= (tag|ref|COMMENT|CRLF)
 
 tag ::= TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE
 
-body ::= FILE_NAME
+ref ::= FILE_NAME

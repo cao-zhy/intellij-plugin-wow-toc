@@ -1,7 +1,7 @@
 // This is a generated file. Not intended for manual editing.
 package com.github.czy211.wowtoc.psi;
 
-import com.github.czy211.wowtoc.psi.impl.TocBodyImpl;
+import com.github.czy211.wowtoc.psi.impl.TocRefImpl;
 import com.github.czy211.wowtoc.psi.impl.TocTagImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -9,7 +9,7 @@ import com.intellij.psi.tree.IElementType;
 
 public interface TocTypes {
 
-    IElementType BODY = new TocElementType("BODY");
+    IElementType REF = new TocElementType("REF");
     IElementType TAG = new TocElementType("TAG");
 
     IElementType COMMENT = new TocTokenType("COMMENT");
@@ -23,8 +23,8 @@ public interface TocTypes {
     class Factory {
         public static PsiElement createElement(ASTNode node) {
             IElementType type = node.getElementType();
-            if (type == BODY) {
-                return new TocBodyImpl(node);
+            if (type == REF) {
+                return new TocRefImpl(node);
             } else if (type == TAG) {
                 return new TocTagImpl(node);
             }

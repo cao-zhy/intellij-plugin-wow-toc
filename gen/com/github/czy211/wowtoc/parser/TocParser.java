@@ -19,26 +19,26 @@ public class TocParser implements PsiParser, LightPsiParser {
     }
 
     /* ********************************************************** */
-    // FILE_NAME
-    public static boolean body(PsiBuilder b, int l) {
-        if (!recursion_guard_(b, l, "body")) return false;
-        if (!nextTokenIs(b, FILE_NAME)) return false;
-        boolean r;
-        Marker m = enter_section_(b);
-        r = consumeToken(b, FILE_NAME);
-        exit_section_(b, m, BODY, r);
-        return r;
-    }
-
-    /* ********************************************************** */
-    // tag|body|COMMENT|CRLF
+    // tag|ref|COMMENT|CRLF
     static boolean item_(PsiBuilder b, int l) {
         if (!recursion_guard_(b, l, "item_")) return false;
         boolean r;
         r = tag(b, l + 1);
-        if (!r) r = body(b, l + 1);
+        if (!r) r = ref(b, l + 1);
         if (!r) r = consumeToken(b, COMMENT);
         if (!r) r = consumeToken(b, CRLF);
+        return r;
+    }
+
+    /* ********************************************************** */
+    // FILE_NAME
+    public static boolean ref(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "ref")) return false;
+        if (!nextTokenIs(b, FILE_NAME)) return false;
+        boolean r;
+        Marker m = enter_section_(b);
+        r = consumeToken(b, FILE_NAME);
+        exit_section_(b, m, REF, r);
         return r;
     }
 
