@@ -17,13 +17,12 @@ import com.intellij.psi.TokenType;
 
 CRLF=[\r|\n|\r\n]
 WHITE_SPACE=[ ]
-END_OF_LINE_COMMENT=[ ]*#|([ ]*#(##.*|[^#].*))
+END_OF_LINE_COMMENT=[ ]+#[^\n\f]*|#(##[^\n\f]*|[^#\n\f][^\n\f]*)|#
 TAG_PREFIX=##
-LOCALIZITION=enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN
-TAG_NAME=Interface|Title(-{LOCALIZITION})?|Notes(-{LOCALIZITION})?|RequiredDeps|Dependencies|Dep[^: \n\f]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariables|SavedVariablesPerCharacter|DefaultState|Secure|Author|Version|[Xx]-[^: \n\f]+
+TAG_NAME=[^: \n\f]+
 SEPARATOR=:
 TAG_VALUE=[^ \n\f]+|[^ \n\f][^\n\f]*[^ \n\f]
-FILE_NAME=[ ]*[^ #\n\f].*\.([lL][uU][aA]|[xM][mM][lL])
+FILE_NAME=[ ]*[^ #\n\f]([^ \n\f]*|[^\n\f]*[^ \n\f])
 
 %state WAITING_TAG_NAME
 %state WAITING_SEPARATOR
@@ -33,7 +32,7 @@ FILE_NAME=[ ]*[^ #\n\f].*\.([lL][uU][aA]|[xM][mM][lL])
 %%
 
 <YYINITIAL> {CRLF}+ {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
-<YYINITIAL> {END_OF_LINE_COMMENT} {yybegin(YYINITIAL); return TocTypes.COMMENT;}
+<YYINITIAL> {END_OF_LINE_COMMENT} {yybegin(WAITING_CRLF); return TocTypes.COMMENT;}
 <YYINITIAL> {TAG_PREFIX} {yybegin(WAITING_TAG_NAME); return TocTypes.TAG_PREFIX;}
 <YYINITIAL> {FILE_NAME} {yybegin(WAITING_CRLF); return TocTypes.FILE_NAME;}
 <WAITING_TAG_NAME> {WHITE_SPACE}+ {yybegin(WAITING_TAG_NAME); return TokenType.WHITE_SPACE;}
@@ -42,5 +41,5 @@ FILE_NAME=[ ]*[^ #\n\f].*\.([lL][uU][aA]|[xM][mM][lL])
 <WAITING_SEPARATOR> {SEPARATOR} {yybegin(WAITING_TAG_VALUE); return TocTypes.SEPARATOR;}
 <WAITING_TAG_VALUE> {WHITE_SPACE}+ {yybegin(WAITING_TAG_VALUE); return TokenType.WHITE_SPACE;}
 <WAITING_TAG_VALUE> {TAG_VALUE} {yybegin(WAITING_CRLF); return TocTypes.TAG_VALUE;}
-<WAITING_CRLF> {WHITE_SPACE}*{CRLF}* {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
+<WAITING_CRLF> {WHITE_SPACE}*{CRLF}+ {yybegin(YYINITIAL); return TokenType.WHITE_SPACE;}
 [^] {return TokenType.BAD_CHARACTER;}
