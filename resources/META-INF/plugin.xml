@@ -38,6 +38,7 @@
         <lang.syntaxHighlighterFactory language="Toc"
                                        implementationClass="com.github.czy211.wowtoc.TocSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="com.github.czy211.wowtoc.TocColorSettingsPage"/>
+        <annotator language="Toc" implementationClass="com.github.czy211.wowtoc.TocAnnotator"/>
     </extensions>
 
     <actions>
