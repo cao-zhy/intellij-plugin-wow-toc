@@ -5,6 +5,7 @@ import com.github.czy211.wowtoc.psi.TocTag;
 import com.github.czy211.wowtoc.psi.TocVisitor;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,6 +22,16 @@ public class TocTagImpl extends ASTWrapperPsiElement implements TocTag {
     public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof TocVisitor) accept((TocVisitor) visitor);
         else super.accept(visitor);
+    }
+
+    @Override
+    public String getTagName() {
+        return TocPsiImplUtil.getTagName(this);
+    }
+
+    @Override
+    public TextRange getTagNameRange() {
+        return TocPsiImplUtil.getTagNameRange(this);
     }
 
 }

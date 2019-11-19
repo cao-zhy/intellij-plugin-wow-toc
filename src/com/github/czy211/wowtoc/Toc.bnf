@@ -11,12 +11,14 @@
     elementTypeHolderClass="com.github.czy211.wowtoc.psi.TocTypes"
     elementTypeClass="com.github.czy211.wowtoc.psi.TocElementType"
     tokenTypeClass="com.github.czy211.wowtoc.psi.TocTokenType"
+
+    psiImplUtilClass="com.github.czy211.wowtoc.psi.impl.TocPsiImplUtil"
 }
 
 simpleFile ::= item_*
 
 private item_ ::= (tag|refer|COMMENT|CRLF)
 
-tag ::= TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE
+tag ::= TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE {methods=[getTagName getTagNameRange]}
 
-refer ::= FILE_NAME
+refer ::= FILE_NAME {methods=[getFileName getFileNameRange]}

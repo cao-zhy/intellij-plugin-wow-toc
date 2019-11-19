@@ -25,7 +25,7 @@ public class TocUtil {
         Set<String> result = new HashSet<>();
         PsiDirectory directory = psiElement.getContainingFile().getParent();
         if (directory != null) {
-            PsiFile[] psiFiles = psiElement.getContainingFile().getParent().getFiles();
+            PsiFile[] psiFiles = directory.getFiles();
             for (PsiFile file : psiFiles) {
                 String name = file.getName();
                 if (name.matches(REGEX_FILE_NAME)) {
