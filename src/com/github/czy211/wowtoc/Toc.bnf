@@ -15,7 +15,7 @@
     psiImplUtilClass="com.github.czy211.wowtoc.psi.impl.TocPsiImplUtil"
 }
 
-simpleFile ::= item_*
+tocFile ::= item_*
 
 private item_ ::= (tag|refer|COMMENT|CRLF)
 

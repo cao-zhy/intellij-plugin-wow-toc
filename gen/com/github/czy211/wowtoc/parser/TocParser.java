@@ -15,7 +15,7 @@ import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 public class TocParser implements PsiParser, LightPsiParser {
 
     static boolean parse_root_(IElementType t, PsiBuilder b, int l) {
-        return simpleFile(b, l + 1);
+        return tocFile(b, l + 1);
     }
 
     /* ********************************************************** */
@@ -43,18 +43,6 @@ public class TocParser implements PsiParser, LightPsiParser {
     }
 
     /* ********************************************************** */
-    // item_*
-    static boolean simpleFile(PsiBuilder b, int l) {
-        if (!recursion_guard_(b, l, "simpleFile")) return false;
-        while (true) {
-            int c = current_position_(b);
-            if (!item_(b, l + 1)) break;
-            if (!empty_element_parsed_guard_(b, "simpleFile", c)) break;
-        }
-        return true;
-    }
-
-    /* ********************************************************** */
     // TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE
     public static boolean tag(PsiBuilder b, int l) {
         if (!recursion_guard_(b, l, "tag")) return false;
@@ -64,6 +52,18 @@ public class TocParser implements PsiParser, LightPsiParser {
         r = consumeTokens(b, 0, TAG_PREFIX, TAG_NAME, SEPARATOR, TAG_VALUE);
         exit_section_(b, m, TAG, r);
         return r;
+    }
+
+    /* ********************************************************** */
+    // item_*
+    static boolean tocFile(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tocFile")) return false;
+        while (true) {
+            int c = current_position_(b);
+            if (!item_(b, l + 1)) break;
+            if (!empty_element_parsed_guard_(b, "tocFile", c)) break;
+        }
+        return true;
     }
 
     public ASTNode parse(IElementType t, PsiBuilder b) {
