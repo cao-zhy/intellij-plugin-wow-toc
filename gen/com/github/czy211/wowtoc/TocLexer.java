@@ -48,7 +48,7 @@ class TocLexer implements FlexLexer {
     private static final String ZZ_ACTION_PACKED_0 =
             "\5\0\1\1\1\2\1\3\1\4\1\3\1\2\1\5" +
                     "\1\6\1\7\1\10\1\11\1\12\1\3\2\0\1\4" +
-                    "\1\13\2\0";
+                    "\1\13\3\0";
     /**
      * Translates DFA states to action switch labels.
      */
@@ -56,7 +56,8 @@ class TocLexer implements FlexLexer {
   private static final String ZZ_ROWMAP_PACKED_0 =
           "\0\0\0\7\0\16\0\25\0\34\0\43\0\52\0\61" +
                   "\0\70\0\77\0\106\0\115\0\124\0\133\0\77\0\142" +
-                  "\0\151\0\160\0\43\0\61\0\167\0\176\0\142\0\160";
+                  "\0\151\0\160\0\43\0\61\0\167\0\176\0\115\0\142"+
+    "\0\160";
   /**
    * Translates a state to a row index in the transition table
    */
@@ -68,9 +69,9 @@ class TocLexer implements FlexLexer {
                   "\1\12\2\6\1\23\1\6\2\0\2\6\1\7\1\23" +
                   "\1\6\1\0\1\13\3\6\1\24\1\25\2\0\1\6" +
                   "\3\25\1\26\2\0\1\25\10\0\1\13\3\0\1\13" +
-                  "\1\0\2\14\1\0\1\14\5\0\1\15\6\0\1\16" +
-                  "\4\0\2\20\1\27\1\20\2\0\1\20\2\0\1\21" +
-                  "\5\0\1\13\1\30\2\0\1\13\1\0\4\25\2\0" +
+                  "\1\0\2\14\1\27\1\14\5\0\1\15\6\0\1\16" +
+                  "\4\0\2\20\1\30\1\20\2\0\1\20\2\0\1\21" +
+                  "\5\0\1\13\1\31\2\0\1\13\1\0\4\25\2\0" +
                   "\1\25\3\0\1\25\3\0";
   /**
    * The transition table of the DFA
@@ -88,7 +89,7 @@ class TocLexer implements FlexLexer {
   };
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
           "\5\0\4\1\1\11\4\1\1\11\3\1\2\0\2\1"+
-    "\2\0";
+    "\3\0";
   /**
    * ZZ_ATTRIBUTE[aState] contains the attributes of state <code>aState</code>
    */
@@ -130,7 +131,7 @@ class TocLexer implements FlexLexer {
     }
 
     private static int[] zzUnpackAction() {
-        int[] result = new int[24];
+        int[] result = new int[25];
         int offset = 0;
         offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
         return result;
@@ -149,7 +150,7 @@ class TocLexer implements FlexLexer {
     }
 
     private static int[] zzUnpackRowMap() {
-        int[] result = new int[24];
+        int[] result = new int[25];
         int offset = 0;
         offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
         return result;
@@ -187,7 +188,7 @@ class TocLexer implements FlexLexer {
     }
 
     private static int[] zzUnpackAttribute() {
-        int[] result = new int[24];
+        int[] result = new int[25];
         int offset = 0;
         offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
         return result;
@@ -201,7 +202,7 @@ class TocLexer implements FlexLexer {
             int count = packed.charAt(i++);
             int value = packed.charAt(i++);
             do result[j++] = value; while (--count > 0);
-        }
+    }
     return j;
   }
 
@@ -403,7 +404,7 @@ class TocLexer implements FlexLexer {
       // set up zzAction for empty match case:
       int zzAttributes = zzAttrL[zzState];
         if ((zzAttributes & 1) == 1) {
-            zzAction = zzState;
+        zzAction = zzState;
       }
 
 
@@ -427,14 +428,14 @@ class TocLexer implements FlexLexer {
               zzMarkedPosL = zzMarkedPos;
               zzBufferL = zzBuffer;
               zzEndReadL     = zzEndRead;
-            if (eof) {
-                zzInput = YYEOF;
-                break zzForAction;
+              if (eof) {
+                  zzInput = YYEOF;
+                  break zzForAction;
             }
             else {
               zzInput = Character.codePointAt(zzBufferL, zzCurrentPosL/*, zzEndReadL*/);
               zzCurrentPosL += Character.charCount(zzInput);
-            }
+              }
           }
             int zzNext = zzTransL[zzRowMapL[zzState] + ZZ_CMAP(zzInput) ];
           if (zzNext == -1) break zzForAction;
@@ -454,8 +455,8 @@ class TocLexer implements FlexLexer {
       zzMarkedPos = zzMarkedPosL;
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
-        zzAtEOF = true;
-          zzDoEOF();
+          zzAtEOF = true;
+        zzDoEOF();
         return null;
       }
       else {
@@ -530,8 +531,7 @@ class TocLexer implements FlexLexer {
             case 21:
                 break;
             case 11: {
-                yybegin(WAITING_TAG_NAME);
-                return TocTypes.TAG_PREFIX;
+                yybegin(WAITING_TAG_NAME); return TocTypes.TAG_PREFIX;
             } 
             // fall through
           case 22: break;
