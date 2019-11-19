@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TocVisitor extends PsiElementVisitor {
 
-  public void visitRef(@NotNull TocRef o) {
+    public void visitRefer(@NotNull TocRefer o) {
     visitPsiElement(o);
   }
 

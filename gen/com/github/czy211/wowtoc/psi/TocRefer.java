@@ -3,6 +3,6 @@ package com.github.czy211.wowtoc.psi;
 
 import com.intellij.psi.PsiElement;
 
-public interface TocRef extends PsiElement {
+public interface TocRefer extends PsiElement {
 
 }
