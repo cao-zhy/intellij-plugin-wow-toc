@@ -40,6 +40,7 @@
         <colorSettingsPage implementation="com.github.czy211.wowtoc.TocColorSettingsPage"/>
         <annotator language="Toc" implementationClass="com.github.czy211.wowtoc.TocAnnotator"/>
         <completion.contributor language="Toc" implementationClass="com.github.czy211.wowtoc.TocCompletionContributor"/>
+        <lang.findUsagesProvider language="Toc" implementationClass="com.github.czy211.wowtoc.TocFindUsagesProvider"/>
     </extensions>
 
     <actions>
