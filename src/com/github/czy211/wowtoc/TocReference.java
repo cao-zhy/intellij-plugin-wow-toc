@@ -5,6 +5,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReferenceBase;
+import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +25,14 @@ public class TocReference extends PsiReferenceBase {
                     return directory.findFile(fileName);
                 }
             }
+        }
+        return null;
+    }
+
+    @Override
+    public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
+        if (myElement instanceof TocRefer) {
+            return ((TocRefer) myElement).setName(newElementName);
         }
         return null;
     }
