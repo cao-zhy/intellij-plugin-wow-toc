@@ -44,6 +44,7 @@
         <lang.formatter language="TOC" implementationClass="com.github.czy211.wowtoc.TocFormattingModelBuilder"/>
         <codeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocLanguageCodeStyleSettingsProvider"/>
+        <lang.commenter language="TOC" implementationClass="com.github.czy211.wowtoc.TocCommenter"/>
     </extensions>
 
     <actions>
