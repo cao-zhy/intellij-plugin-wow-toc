@@ -23,7 +23,7 @@ public class TocFile extends PsiFileBase {
 
     @Override
     public String toString() {
-        return "Toc File";
+        return "TOC File";
     }
 
     @NotNull

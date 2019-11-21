@@ -16,13 +16,13 @@ public class TocFileType extends LanguageFileType {
     @NotNull
     @Override
     public String getName() {
-        return "Toc File";
+        return "TOC File";
     }
 
     @NotNull
     @Override
     public String getDescription() {
-        return "Toc language file";
+        return "TOC language file";
     }
 
     @NotNull

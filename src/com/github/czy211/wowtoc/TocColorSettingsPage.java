@@ -68,6 +68,6 @@ public class TocColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDisplayName() {
-        return "Toc";
+        return "TOC";
     }
 }

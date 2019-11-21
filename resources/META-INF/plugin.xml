@@ -32,16 +32,16 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <fileType name="Toc file" implementationClass="com.github.czy211.wowtoc.TocFileType" fieldName="INSTANCE"
-                  language="Toc" extensions="toc"/>
-        <lang.parserDefinition language="Toc" implementationClass="com.github.czy211.wowtoc.TocParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="Toc"
+        <fileType name="TOC file" implementationClass="com.github.czy211.wowtoc.TocFileType" fieldName="INSTANCE"
+                  language="TOC" extensions="toc"/>
+        <lang.parserDefinition language="TOC" implementationClass="com.github.czy211.wowtoc.TocParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="TOC"
                                        implementationClass="com.github.czy211.wowtoc.TocSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="com.github.czy211.wowtoc.TocColorSettingsPage"/>
-        <annotator language="Toc" implementationClass="com.github.czy211.wowtoc.TocAnnotator"/>
-        <completion.contributor language="Toc" implementationClass="com.github.czy211.wowtoc.TocCompletionContributor"/>
-        <lang.findUsagesProvider language="Toc" implementationClass="com.github.czy211.wowtoc.TocFindUsagesProvider"/>
-        <lang.formatter language="Toc" implementationClass="com.github.czy211.wowtoc.TocFormattingModelBuilder"/>
+        <annotator language="TOC" implementationClass="com.github.czy211.wowtoc.TocAnnotator"/>
+        <completion.contributor language="TOC" implementationClass="com.github.czy211.wowtoc.TocCompletionContributor"/>
+        <lang.findUsagesProvider language="TOC" implementationClass="com.github.czy211.wowtoc.TocFindUsagesProvider"/>
+        <lang.formatter language="TOC" implementationClass="com.github.czy211.wowtoc.TocFormattingModelBuilder"/>
         <codeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocLanguageCodeStyleSettingsProvider"/>
     </extensions>
