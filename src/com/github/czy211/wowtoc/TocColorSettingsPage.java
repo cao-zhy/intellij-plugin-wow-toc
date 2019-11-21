@@ -13,10 +13,10 @@ import java.util.Map;
 
 public class TocColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-            new AttributesDescriptor("Key", TocSyntaxHighlighter.KEY),
+            new AttributesDescriptor("Tag name", TocSyntaxHighlighter.KEY),
             new AttributesDescriptor("Separator", TocSyntaxHighlighter.SEPARATOR),
-            new AttributesDescriptor("Value", TocSyntaxHighlighter.VALUE),
-            new AttributesDescriptor("Body", TocSyntaxHighlighter.BODY),
+            new AttributesDescriptor("Tag value", TocSyntaxHighlighter.VALUE),
+            new AttributesDescriptor("File name", TocSyntaxHighlighter.BODY),
             new AttributesDescriptor("Comment", TocSyntaxHighlighter.COMMENT),
             new AttributesDescriptor("Bad character", TocSyntaxHighlighter.BAD_CHARACTER),
     };
@@ -36,15 +36,15 @@ public class TocColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return "## Interface: 80205\n" +
-                "## InvalidTagName: value\n" +
-                "## Title: WlkUI\n" +
-                "## Version: 2.0.0\n" +
-                "\n" +
-                "# 动作条\n" +
-                "ActionBar.lua\n" +
-                "# 拍卖行\n" +
-                "Auction.lua";
+        return "## Interface: 80205\n"
+                + "## Title: WlkUI\n"
+                + "## :Missing tag name\n"
+                + "## Version: 2.0.0\n"
+                + "\n"
+                + "# 动作条\n"
+                + "ActionBar.lua\n"
+                + "# 拍卖行\n"
+                + "Auction.lua";
     }
 
     @Nullable
