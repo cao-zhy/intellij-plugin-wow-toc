@@ -13,10 +13,10 @@ import java.util.Map;
 
 public class TocColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-            new AttributesDescriptor("Tag name", TocSyntaxHighlighter.KEY),
+            new AttributesDescriptor("Tag name", TocSyntaxHighlighter.TAG_NAME),
             new AttributesDescriptor("Separator", TocSyntaxHighlighter.SEPARATOR),
-            new AttributesDescriptor("Tag value", TocSyntaxHighlighter.VALUE),
-            new AttributesDescriptor("File name", TocSyntaxHighlighter.BODY),
+            new AttributesDescriptor("Tag value", TocSyntaxHighlighter.TAG_VALUE),
+            new AttributesDescriptor("File name", TocSyntaxHighlighter.REFER),
             new AttributesDescriptor("Comment", TocSyntaxHighlighter.COMMENT),
             new AttributesDescriptor("Bad character", TocSyntaxHighlighter.BAD_CHARACTER),
     };
