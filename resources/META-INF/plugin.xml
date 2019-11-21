@@ -41,6 +41,9 @@
         <annotator language="Toc" implementationClass="com.github.czy211.wowtoc.TocAnnotator"/>
         <completion.contributor language="Toc" implementationClass="com.github.czy211.wowtoc.TocCompletionContributor"/>
         <lang.findUsagesProvider language="Toc" implementationClass="com.github.czy211.wowtoc.TocFindUsagesProvider"/>
+        <lang.formatter language="Toc" implementationClass="com.github.czy211.wowtoc.TocFormattingModelBuilder"/>
+        <codeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocLanguageCodeStyleSettingsProvider"/>
     </extensions>
 
     <actions>
