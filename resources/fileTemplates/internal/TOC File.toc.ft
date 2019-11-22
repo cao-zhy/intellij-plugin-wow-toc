@@ -4,3 +4,4 @@ ${PREFIX}${PREFIX} Title: ${NAME}
 ${PREFIX}${PREFIX} Notes: ${NAME}
 ${PREFIX}${PREFIX} Author: ${USER}
 ${PREFIX}${PREFIX} Version: 1.0.0
+#[[$END$]]#
