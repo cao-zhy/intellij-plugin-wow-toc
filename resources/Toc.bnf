@@ -17,11 +17,15 @@
 
 tocFile ::= item_*
 
+// TOC 文件由标签、引用文件、注释和换行组成
 private item_ ::= (tag|refer|COMMENT|CRLF)
 
+// 标签可以是以下几种形式：##name:value、##name:、##:value、##:、##name、##（token 多的放在前面）
 tag ::= TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE?|(TAG_PREFIX SEPARATOR TAG_VALUE?)|(TAG_PREFIX TAG_NAME?)
  {methods=[getTagName getKeyRange]}
 
+/* 引用文件只有一个文件名。支持重命名和引用的元素都需要实现 PsiNamedElement 接口，实现getName、setName 和 getNameIdentifier 方
+   法。getReference 方法返回元素的引用 */
 refer ::= FILE_NAME {mixin="com.github.czy211.wowtoc.psi.impl.TocNamedElementImpl"
  implements="com.github.czy211.wowtoc.psi.TocNamedElement"
  methods=[getFileName getName setName getNameIdentifier getReference]}

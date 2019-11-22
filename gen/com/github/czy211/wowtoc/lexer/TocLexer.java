@@ -15,9 +15,9 @@ import com.intellij.psi.tree.IElementType;
  */
 class TocLexer implements FlexLexer {
 
-  /**
-   * This character denotes the end of file
-   */
+    /**
+     * This character denotes the end of file
+     */
   public static final int YYEOF = -1;
   /* The ZZ_CMAP_Z table has 136 entries */
   static final char[] ZZ_CMAP_Z = zzUnpackCMap(
@@ -47,7 +47,7 @@ class TocLexer implements FlexLexer {
   };
   private static final String ZZ_ACTION_PACKED_0 =
           "\4\0\1\1\1\2\1\1\1\3\1\4\1\2\1\4" +
-                  "\2\5\1\6\1\7\2\10\1\11\1\0\1\3\1\12" +
+                  "\2\5\1\6\1\7\2\10\1\11\1\0\1\3\1\12"+
     "\3\0";
   /**
    * Translates DFA states to action switch labels.
@@ -128,17 +128,17 @@ class TocLexer implements FlexLexer {
    * Total runtime size is 1040 bytes
    */
   public static int ZZ_CMAP(int ch) {
-    return ZZ_CMAP_A[ZZ_CMAP_Y[ZZ_CMAP_Z[ch >> 13] | ((ch >> 7) & 0x3f)]|(ch&0x7f)];
+      return ZZ_CMAP_A[ZZ_CMAP_Y[ZZ_CMAP_Z[ch >> 13] | ((ch >> 7) & 0x3f)]|(ch&0x7f)];
   }
 
-  private static int[] zzUnpackAction() {
-    int[] result = new int[24];
+    private static int[] zzUnpackAction() {
+        int[] result = new int[24];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
-  }
+    }
 
-  private static int zzUnpackAction(String packed, int offset, int[] result) {
+    private static int zzUnpackAction(String packed, int offset, int[] result) {
     int i = 0;       /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -148,16 +148,16 @@ class TocLexer implements FlexLexer {
       do result[j++] = value; while (--count > 0);
     }
     return j;
-  }
+    }
 
-  private static int[] zzUnpackRowMap() {
-    int[] result = new int[24];
+    private static int[] zzUnpackRowMap() {
+        int[] result = new int[24];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
-  }
+    }
 
-  private static int zzUnpackRowMap(String packed, int offset, int[] result) {
+    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
     int i = 0;  /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -166,16 +166,16 @@ class TocLexer implements FlexLexer {
       result[j++] = high | packed.charAt(i++);
     }
     return j;
-  }
+    }
 
-  private static int[] zzUnpackTrans() {
-    int[] result = new int[126];
+    private static int[] zzUnpackTrans() {
+        int[] result = new int[126];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
-  }
+    }
 
-  private static int zzUnpackTrans(String packed, int offset, int[] result) {
+    private static int zzUnpackTrans(String packed, int offset, int[] result) {
     int i = 0;       /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -186,16 +186,16 @@ class TocLexer implements FlexLexer {
       do result[j++] = value; while (--count > 0);
     }
     return j;
-  }
+    }
 
-  private static int[] zzUnpackAttribute() {
-    int[] result = new int[24];
+    private static int[] zzUnpackAttribute() {
+        int[] result = new int[24];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
-  }
+    }
 
-  private static int zzUnpackAttribute(String packed, int offset, int[] result) {
+    private static int zzUnpackAttribute(String packed, int offset, int[] result) {
     int i = 0;       /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -232,7 +232,7 @@ class TocLexer implements FlexLexer {
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
     while (i < packed.length()) {
-      int count = packed.charAt(i++);
+        int count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
     }
@@ -389,8 +389,8 @@ class TocLexer implements FlexLexer {
     int zzEndReadL = zzEndRead;
     CharSequence zzBufferL = zzBuffer;
 
-    int[] zzTransL = ZZ_TRANS;
-    int[] zzRowMapL = ZZ_ROWMAP;
+      int[] zzTransL = ZZ_TRANS;
+      int[] zzRowMapL = ZZ_ROWMAP;
     int [] zzAttrL = ZZ_ATTRIBUTE;
 
     while (true) {
@@ -421,14 +421,14 @@ class TocLexer implements FlexLexer {
           }
           else {
             // store back cached positions
-            zzCurrentPos = zzCurrentPosL;
+              zzCurrentPos = zzCurrentPosL;
             zzMarkedPos   = zzMarkedPosL;
             boolean eof = zzRefill();
             // get translated positions and possibly new buffer
-            zzCurrentPosL = zzCurrentPos;
-            zzMarkedPosL = zzMarkedPos;
-            zzBufferL = zzBuffer;
-            zzEndReadL = zzEndRead;
+              zzCurrentPosL = zzCurrentPos;
+              zzMarkedPosL = zzMarkedPos;
+              zzBufferL = zzBuffer;
+              zzEndReadL = zzEndRead;
             if (eof) {
               zzInput = YYEOF;
               break zzForAction;
@@ -438,7 +438,7 @@ class TocLexer implements FlexLexer {
               zzCurrentPosL += Character.charCount(zzInput);
             }
           }
-          int zzNext = zzTransL[zzRowMapL[zzState] + ZZ_CMAP(zzInput) ];
+            int zzNext = zzTransL[zzRowMapL[zzState] + ZZ_CMAP(zzInput) ];
           if (zzNext == -1) break zzForAction;
           zzState = zzNext;
 
@@ -446,7 +446,7 @@ class TocLexer implements FlexLexer {
           if ( (zzAttributes & 1) == 1 ) {
             zzAction = zzState;
             zzMarkedPosL = zzCurrentPosL;
-            if ((zzAttributes & 8) == 8) break zzForAction;
+              if ((zzAttributes & 8) == 8) break zzForAction;
           }
 
         }
@@ -462,73 +462,73 @@ class TocLexer implements FlexLexer {
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
-          case 1: {
-            yybegin(WAITING_CRLF);
-            return TocTypes.FILE_NAME;
-          }
-          // fall through
-          case 11:
-            break;
-          case 2: {
-            yybegin(YYINITIAL);
-            return TokenType.WHITE_SPACE;
-          }
-          // fall through
-          case 12:
-            break;
-          case 3: {
-            yybegin(WAITING_CRLF);
-            return TocTypes.COMMENT;
-          }
-          // fall through
-          case 13:
-            break;
-          case 4: {
-            return TokenType.BAD_CHARACTER;
-          }
-          // fall through
-          case 14:
-            break;
-          case 5: {
-            yybegin(WAITING_KEY);
-            return TocTypes.TAG_NAME;
-          }
-          // fall through
-          case 15:
-            break;
-          case 6: {
-            yybegin(WAITING_KEY);
-            return TokenType.WHITE_SPACE;
-          }
-          // fall through
-          case 16:
-            break;
-          case 7: {
-            yybegin(WAITING_VALUE);
-            return TocTypes.SEPARATOR;
-          }
-          // fall through
-          case 17:
-            break;
-          case 8: {
-            yybegin(WAITING_CRLF);
-            return TocTypes.TAG_VALUE;
-          }
-          // fall through
-          case 18:
-            break;
-          case 9: {
-            yybegin(WAITING_VALUE);
-            return TokenType.WHITE_SPACE;
-          }
-          // fall through
-          case 19:
-            break;
-          case 10: {
-            yybegin(WAITING_KEY);
-            return TocTypes.TAG_PREFIX;
-          }
-          // fall through
+            case 1: {
+                yybegin(WAITING_CRLF);
+                return TocTypes.FILE_NAME;
+            }
+            // fall through
+            case 11:
+                break;
+            case 2: {
+                yybegin(YYINITIAL);
+                return TokenType.WHITE_SPACE;
+            }
+            // fall through
+            case 12:
+                break;
+            case 3: {
+                yybegin(WAITING_CRLF);
+                return TocTypes.COMMENT;
+            }
+            // fall through
+            case 13:
+                break;
+            case 4: {
+                return TokenType.BAD_CHARACTER;
+            }
+            // fall through
+            case 14:
+                break;
+            case 5: {
+                yybegin(WAITING_KEY);
+                return TocTypes.TAG_NAME;
+            }
+            // fall through
+            case 15:
+                break;
+            case 6: {
+                yybegin(WAITING_KEY);
+                return TokenType.WHITE_SPACE;
+            }
+            // fall through
+            case 16:
+                break;
+            case 7: {
+                yybegin(WAITING_VALUE);
+                return TocTypes.SEPARATOR;
+            }
+            // fall through
+            case 17:
+                break;
+            case 8: {
+                yybegin(WAITING_CRLF);
+                return TocTypes.TAG_VALUE;
+            }
+            // fall through
+            case 18:
+                break;
+            case 9: {
+                yybegin(WAITING_VALUE);
+                return TokenType.WHITE_SPACE;
+            }
+            // fall through
+            case 19:
+                break;
+            case 10: {
+                yybegin(WAITING_KEY);
+                return TocTypes.TAG_PREFIX;
+            }
+            // fall through
           case 20: break;
           default:
             zzScanError(ZZ_NO_MATCH);

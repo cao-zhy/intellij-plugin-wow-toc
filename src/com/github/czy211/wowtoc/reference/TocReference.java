@@ -15,6 +15,11 @@ public class TocReference extends PsiReferenceBase {
         super(element, rangeInElement);
     }
 
+    /**
+     * 返回元素的引用
+     *
+     * @return 元素的引用
+     */
     @Nullable
     @Override
     public PsiElement resolve() {
@@ -30,6 +35,13 @@ public class TocReference extends PsiReferenceBase {
         return null;
     }
 
+    /**
+     * 重写此方法来重命名元素
+     *
+     * @param newElementName 新名字
+     * @return 有新名字的元素
+     * @throws IncorrectOperationException 不正确操作的异常
+     */
     @Override
     public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
         if (myElement instanceof TocRefer) {

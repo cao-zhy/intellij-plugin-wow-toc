@@ -11,6 +11,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 
 public class TocPsiImplUtil {
+    /**
+     * 获取标签名
+     *
+     * @param psiElement PSI 元素
+     * @return 标签名
+     */
     public static String getTagName(TocTag psiElement) {
         ASTNode node = psiElement.getNode().findChildByType(TocTypes.TAG_NAME);
         if (node != null) {
@@ -20,6 +26,12 @@ public class TocPsiImplUtil {
         }
     }
 
+    /**
+     * 获取标签前缀加标签名的内容范围
+     *
+     * @param psiElement PSI 元素
+     * @return 内容范围
+     */
     public static TextRange getKeyRange(TocTag psiElement) {
         ASTNode tagPrefixNode = psiElement.getNode().findChildByType(TocTypes.TAG_PREFIX);
         ASTNode tagNameNode = psiElement.getNode().findChildByType(TocTypes.TAG_NAME);
@@ -32,6 +44,12 @@ public class TocPsiImplUtil {
         return new TextRange(start, end);
     }
 
+    /**
+     * 获取文件名
+     *
+     * @param psiElement PSI 元素
+     * @return 文件名
+     */
     public static String getFileName(TocRefer psiElement) {
         ASTNode node = psiElement.getNode().findChildByType(TocTypes.FILE_NAME);
         if (node != null) {
@@ -65,6 +83,7 @@ public class TocPsiImplUtil {
     }
 
     public static PsiReference getReference(TocRefer psiElement) {
+        // 内容范围是从该 PSI 元素开始算，而不是从整个文件开始算
         return new TocReference(psiElement, new TextRange(0, psiElement.getTextLength()));
     }
 }

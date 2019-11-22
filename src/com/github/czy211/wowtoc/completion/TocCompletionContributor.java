@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class TocCompletionContributor extends CompletionContributor {
     public TocCompletionContributor() {
+        /* 在输入标签名时，提示官方标签名 */
         extend(CompletionType.BASIC, PlatformPatterns.psiElement(TocTypes.TAG_NAME).withLanguage(TocLanguage.INSTANCE),
                 new CompletionProvider<CompletionParameters>() {
                     @Override
@@ -36,6 +37,7 @@ public class TocCompletionContributor extends CompletionContributor {
                     }
                 });
 
+        /* 在输入文件名时，提示同目录下的 lua 文件和 xml 文件 */
         extend(CompletionType.BASIC, PlatformPatterns.psiElement(TocTypes.FILE_NAME).withLanguage(TocLanguage.INSTANCE),
                 new CompletionProvider<CompletionParameters>() {
                     @Override
