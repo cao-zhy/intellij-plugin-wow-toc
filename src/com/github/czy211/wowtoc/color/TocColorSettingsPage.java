@@ -1,5 +1,7 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.color;
 
+import com.github.czy211.wowtoc.highlighter.TocSyntaxHighlighter;
+import com.github.czy211.wowtoc.icon.TocIcon;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;

@@ -32,25 +32,31 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <fileType name="TOC file" implementationClass="com.github.czy211.wowtoc.TocFileType" fieldName="INSTANCE"
+        <fileType name="TOC file" implementationClass="com.github.czy211.wowtoc.filetype.TocFileType"
+                  fieldName="INSTANCE"
                   language="TOC" extensions="toc"/>
-        <lang.parserDefinition language="TOC" implementationClass="com.github.czy211.wowtoc.TocParserDefinition"/>
+        <lang.parserDefinition language="TOC"
+                               implementationClass="com.github.czy211.wowtoc.parser.TocParserDefinition"/>
         <lang.syntaxHighlighterFactory language="TOC"
-                                       implementationClass="com.github.czy211.wowtoc.TocSyntaxHighlighterFactory"/>
-        <colorSettingsPage implementation="com.github.czy211.wowtoc.TocColorSettingsPage"/>
-        <annotator language="TOC" implementationClass="com.github.czy211.wowtoc.TocAnnotator"/>
-        <completion.contributor language="TOC" implementationClass="com.github.czy211.wowtoc.TocCompletionContributor"/>
-        <lang.findUsagesProvider language="TOC" implementationClass="com.github.czy211.wowtoc.TocFindUsagesProvider"/>
-        <lang.formatter language="TOC" implementationClass="com.github.czy211.wowtoc.TocFormattingModelBuilder"/>
-        <codeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocCodeStyleSettingsProvider"/>
-        <langCodeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocLanguageCodeStyleSettingsProvider"/>
-        <lang.commenter language="TOC" implementationClass="com.github.czy211.wowtoc.TocCommenter"/>
+                                       implementationClass="com.github.czy211.wowtoc.highlighter.TocSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="com.github.czy211.wowtoc.color.TocColorSettingsPage"/>
+        <annotator language="TOC" implementationClass="com.github.czy211.wowtoc.annotator.TocAnnotator"/>
+        <completion.contributor language="TOC"
+                                implementationClass="com.github.czy211.wowtoc.completion.TocCompletionContributor"/>
+        <lang.findUsagesProvider language="TOC"
+                                 implementationClass="com.github.czy211.wowtoc.findusage.TocFindUsagesProvider"/>
+        <lang.formatter language="TOC"
+                        implementationClass="com.github.czy211.wowtoc.formatter.TocFormattingModelBuilder"/>
+        <codeStyleSettingsProvider implementation="com.github.czy211.wowtoc.codestyle.TocCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider
+                implementation="com.github.czy211.wowtoc.codestyle.TocLanguageCodeStyleSettingsProvider"/>
+        <lang.commenter language="TOC" implementationClass="com.github.czy211.wowtoc.commenter.TocCommenter"/>
         <internalFileTemplate name="TOC File"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="TocNewFileAction" class="com.github.czy211.wowtoc.TocNewFileAction">
+        <action id="TocNewFileAction" class="com.github.czy211.wowtoc.action.TocNewFileAction">
             <add-to-group group-id="NewGroup" relative-to-action="NewFromTemplate" anchor="before"/>
         </action>
     </actions>

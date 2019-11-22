@@ -1,7 +1,7 @@
 package com.github.czy211.wowtoc.psi;
 
-import com.github.czy211.wowtoc.TocFileType;
-import com.github.czy211.wowtoc.TocLanguage;
+import com.github.czy211.wowtoc.filetype.TocFileType;
+import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;

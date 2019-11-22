@@ -1,6 +1,6 @@
 package com.github.czy211.wowtoc.psi;
 
-import com.github.czy211.wowtoc.TocFileType;
+import com.github.czy211.wowtoc.filetype.TocFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFileFactory;
 

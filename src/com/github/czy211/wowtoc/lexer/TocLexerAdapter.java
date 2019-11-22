@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 

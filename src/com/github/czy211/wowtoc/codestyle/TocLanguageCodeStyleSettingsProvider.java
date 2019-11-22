@@ -1,5 +1,6 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.codestyle;
 
+import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;

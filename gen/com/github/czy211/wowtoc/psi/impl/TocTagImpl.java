@@ -20,7 +20,7 @@ public class TocTagImpl extends ASTWrapperPsiElement implements TocTag {
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof TocVisitor) accept((TocVisitor) visitor);
+      if (visitor instanceof TocVisitor) accept((TocVisitor) visitor);
     else super.accept(visitor);
   }
 

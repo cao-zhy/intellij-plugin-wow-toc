@@ -1,5 +1,7 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.formatter;
 
+import com.github.czy211.wowtoc.codestyle.TocCodeStyleSettings;
+import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.github.czy211.wowtoc.psi.TocTypes;
 import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelBuilder;

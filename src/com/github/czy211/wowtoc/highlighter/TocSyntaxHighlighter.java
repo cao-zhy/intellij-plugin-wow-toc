@@ -1,5 +1,6 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.highlighter;
 
+import com.github.czy211.wowtoc.lexer.TocLexerAdapter;
 import com.github.czy211.wowtoc.psi.TocTypes;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;

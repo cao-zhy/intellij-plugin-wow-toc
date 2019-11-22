@@ -1,5 +1,6 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.formatter;
 
+import com.github.czy211.wowtoc.codestyle.TocCodeStyleSettings;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.TokenType;

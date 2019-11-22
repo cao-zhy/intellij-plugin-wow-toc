@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.commenter;
 
 import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.Nullable;

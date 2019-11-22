@@ -1,6 +1,7 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.reference;
 
 import com.github.czy211.wowtoc.psi.TocRefer;
+import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;

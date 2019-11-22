@@ -1,8 +1,9 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.annotator;
 
 import com.github.czy211.wowtoc.psi.TocRefer;
 import com.github.czy211.wowtoc.psi.TocTag;
 import com.github.czy211.wowtoc.psi.impl.TocPsiImplUtil;
+import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.util.TextRange;

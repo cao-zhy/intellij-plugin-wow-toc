@@ -1,6 +1,8 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.completion;
 
+import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.github.czy211.wowtoc.psi.TocTypes;
+import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;

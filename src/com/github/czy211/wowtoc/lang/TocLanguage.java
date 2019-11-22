@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.lang;
 
 import com.intellij.lang.Language;
 

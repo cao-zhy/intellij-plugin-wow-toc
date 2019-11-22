@@ -1,10 +1,10 @@
 package com.github.czy211.wowtoc.psi.impl;
 
-import com.github.czy211.wowtoc.TocReference;
 import com.github.czy211.wowtoc.psi.TocElementFactory;
 import com.github.czy211.wowtoc.psi.TocRefer;
 import com.github.czy211.wowtoc.psi.TocTag;
 import com.github.czy211.wowtoc.psi.TocTypes;
+import com.github.czy211.wowtoc.reference.TocReference;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;

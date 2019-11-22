@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.codestyle;
 
 import com.intellij.application.options.CodeStyleAbstractConfigurable;
 import com.intellij.application.options.CodeStyleAbstractPanel;

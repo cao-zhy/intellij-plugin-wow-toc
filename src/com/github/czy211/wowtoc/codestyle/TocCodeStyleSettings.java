@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.codestyle;
 
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;

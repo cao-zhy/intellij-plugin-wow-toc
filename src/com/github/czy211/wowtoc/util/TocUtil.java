@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.util;
 
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;

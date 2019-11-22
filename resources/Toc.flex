@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.github.czy211.wowtoc.psi.TocTypes;

@@ -1,6 +1,7 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.parser;
 
-import com.github.czy211.wowtoc.parser.TocParser;
+import com.github.czy211.wowtoc.lang.TocLanguage;
+import com.github.czy211.wowtoc.lexer.TocLexerAdapter;
 import com.github.czy211.wowtoc.psi.TocFile;
 import com.github.czy211.wowtoc.psi.TocTypes;
 import com.intellij.lang.ASTNode;

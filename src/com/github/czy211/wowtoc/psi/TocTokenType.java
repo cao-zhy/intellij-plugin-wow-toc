@@ -1,6 +1,6 @@
 package com.github.czy211.wowtoc.psi;
 
-import com.github.czy211.wowtoc.TocLanguage;
+import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 

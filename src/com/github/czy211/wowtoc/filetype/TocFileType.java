@@ -1,5 +1,7 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.filetype;
 
+import com.github.czy211.wowtoc.icon.TocIcon;
+import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

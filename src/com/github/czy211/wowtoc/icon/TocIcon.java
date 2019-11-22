@@ -1,4 +1,4 @@
-package com.github.czy211.wowtoc;
+package com.github.czy211.wowtoc.icon;
 
 import com.intellij.icons.AllIcons;
 
