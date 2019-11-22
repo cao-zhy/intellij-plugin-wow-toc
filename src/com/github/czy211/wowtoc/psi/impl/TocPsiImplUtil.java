@@ -20,9 +20,16 @@ public class TocPsiImplUtil {
         }
     }
 
-    public static TextRange getTagNameRange(TocTag psiElement) {
-        ASTNode node = psiElement.getNode().findChildByType(TocTypes.TAG_NAME);
-        return node == null ? null : node.getTextRange();
+    public static TextRange getKeyRange(TocTag psiElement) {
+        ASTNode tagPrefixNode = psiElement.getNode().findChildByType(TocTypes.TAG_PREFIX);
+        ASTNode tagNameNode = psiElement.getNode().findChildByType(TocTypes.TAG_NAME);
+        if (tagPrefixNode == null) {
+            return null;
+        }
+        int start = tagPrefixNode.getStartOffset();
+        ASTNode node = tagNameNode == null ? tagPrefixNode : tagNameNode;
+        int end = node.getTextRange().getEndOffset();
+        return new TextRange(start, end);
     }
 
     public static String getFileName(TocRefer psiElement) {
@@ -32,11 +39,6 @@ public class TocPsiImplUtil {
         } else {
             return null;
         }
-    }
-
-    public static TextRange getFileNameRange(TocRefer psiElement) {
-        ASTNode node = psiElement.getNode().findChildByType(TocTypes.FILE_NAME);
-        return node == null ? null : node.getTextRange();
     }
 
     public static String getName(TocRefer psiElement) {

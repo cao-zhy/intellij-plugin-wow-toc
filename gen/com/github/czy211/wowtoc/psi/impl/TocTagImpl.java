@@ -11,27 +11,27 @@ import org.jetbrains.annotations.NotNull;
 
 public class TocTagImpl extends ASTWrapperPsiElement implements TocTag {
 
-    public TocTagImpl(@NotNull ASTNode node) {
-        super(node);
-    }
+  public TocTagImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-    public void accept(@NotNull TocVisitor visitor) {
-        visitor.visitTag(this);
-    }
+  public void accept(@NotNull TocVisitor visitor) {
+    visitor.visitTag(this);
+  }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof TocVisitor) accept((TocVisitor) visitor);
-        else super.accept(visitor);
-    }
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof TocVisitor) accept((TocVisitor) visitor);
+    else super.accept(visitor);
+  }
 
-    @Override
-    public String getTagName() {
-        return TocPsiImplUtil.getTagName(this);
-    }
+  @Override
+  public String getTagName() {
+    return TocPsiImplUtil.getTagName(this);
+  }
 
-    @Override
-    public TextRange getTagNameRange() {
-        return TocPsiImplUtil.getTagNameRange(this);
-    }
+  @Override
+  public TextRange getKeyRange() {
+    return TocPsiImplUtil.getKeyRange(this);
+  }
 
 }

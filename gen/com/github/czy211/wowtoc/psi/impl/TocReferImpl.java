@@ -4,7 +4,6 @@ package com.github.czy211.wowtoc.psi.impl;
 import com.github.czy211.wowtoc.psi.TocRefer;
 import com.github.czy211.wowtoc.psi.TocVisitor;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -29,11 +28,6 @@ public class TocReferImpl extends TocNamedElementImpl implements TocRefer {
   public String getFileName() {
     return TocPsiImplUtil.getFileName(this);
   }
-
-    @Override
-    public TextRange getFileNameRange() {
-        return TocPsiImplUtil.getFileNameRange(this);
-    }
 
     @Override
     public String getName() {

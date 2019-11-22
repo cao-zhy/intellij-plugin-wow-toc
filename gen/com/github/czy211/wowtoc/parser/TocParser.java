@@ -43,15 +43,71 @@ public class TocParser implements PsiParser, LightPsiParser {
     }
 
     /* ********************************************************** */
-    // TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE
+    // TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE?|(TAG_PREFIX SEPARATOR TAG_VALUE?)|(TAG_PREFIX TAG_NAME?)
     public static boolean tag(PsiBuilder b, int l) {
         if (!recursion_guard_(b, l, "tag")) return false;
         if (!nextTokenIs(b, TAG_PREFIX)) return false;
         boolean r;
         Marker m = enter_section_(b);
-        r = consumeTokens(b, 0, TAG_PREFIX, TAG_NAME, SEPARATOR, TAG_VALUE);
+        r = tag_0(b, l + 1);
+        if (!r) r = tag_1(b, l + 1);
+        if (!r) r = tag_2(b, l + 1);
         exit_section_(b, m, TAG, r);
         return r;
+    }
+
+    // TAG_PREFIX TAG_NAME SEPARATOR TAG_VALUE?
+    private static boolean tag_0(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tag_0")) return false;
+        boolean r;
+        Marker m = enter_section_(b);
+        r = consumeTokens(b, 0, TAG_PREFIX, TAG_NAME, SEPARATOR);
+        r = r && tag_0_3(b, l + 1);
+        exit_section_(b, m, null, r);
+        return r;
+    }
+
+    // TAG_VALUE?
+    private static boolean tag_0_3(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tag_0_3")) return false;
+        consumeToken(b, TAG_VALUE);
+        return true;
+    }
+
+    // TAG_PREFIX SEPARATOR TAG_VALUE?
+    private static boolean tag_1(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tag_1")) return false;
+        boolean r;
+        Marker m = enter_section_(b);
+        r = consumeTokens(b, 0, TAG_PREFIX, SEPARATOR);
+        r = r && tag_1_2(b, l + 1);
+        exit_section_(b, m, null, r);
+        return r;
+    }
+
+    // TAG_VALUE?
+    private static boolean tag_1_2(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tag_1_2")) return false;
+        consumeToken(b, TAG_VALUE);
+        return true;
+    }
+
+    // TAG_PREFIX TAG_NAME?
+    private static boolean tag_2(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tag_2")) return false;
+        boolean r;
+        Marker m = enter_section_(b);
+        r = consumeToken(b, TAG_PREFIX);
+        r = r && tag_2_1(b, l + 1);
+        exit_section_(b, m, null, r);
+        return r;
+    }
+
+    // TAG_NAME?
+    private static boolean tag_2_1(PsiBuilder b, int l) {
+        if (!recursion_guard_(b, l, "tag_2_1")) return false;
+        consumeToken(b, TAG_NAME);
+        return true;
     }
 
     /* ********************************************************** */

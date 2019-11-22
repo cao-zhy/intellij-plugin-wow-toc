@@ -6,8 +6,8 @@ import com.intellij.psi.PsiElement;
 
 public interface TocTag extends PsiElement {
 
-    String getTagName();
+  String getTagName();
 
-    TextRange getTagNameRange();
+  TextRange getKeyRange();
 
 }

@@ -38,7 +38,6 @@ public class TocColorSettingsPage implements ColorSettingsPage {
     public String getDemoText() {
         return "## Interface: 80205\n"
                 + "## Title: WlkUI\n"
-                + "## :Missing tag name\n"
                 + "## Version: 2.0.0\n"
                 + "\n"
                 + "# 动作条\n"
