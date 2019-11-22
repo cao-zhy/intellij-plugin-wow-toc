@@ -45,10 +45,14 @@
         <codeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider implementation="com.github.czy211.wowtoc.TocLanguageCodeStyleSettingsProvider"/>
         <lang.commenter language="TOC" implementationClass="com.github.czy211.wowtoc.TocCommenter"/>
+        <internalFileTemplate name="TOC File"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
+        <action id="TocNewFileAction" class="com.github.czy211.wowtoc.TocNewFileAction">
+            <add-to-group group-id="NewGroup" relative-to-action="NewFromTemplate" anchor="before"/>
+        </action>
     </actions>
 
 </idea-plugin>
