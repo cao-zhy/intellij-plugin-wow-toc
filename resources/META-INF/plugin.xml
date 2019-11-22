@@ -1,26 +1,35 @@
 <idea-plugin>
     <id>com.github.czy211.wowtoc</id>
-    <name>WoW TOC Support</name>
+    <name>WoW TOC</name>
     <version>1.0.0</version>
     <vendor email="czy211@hotmail.com" url="https://github.com/czy211">czy211</vendor>
 
     <description>
         <![CDATA[
-            <p>Add support for World of Warcraft addons .toc file.</p>
-            <a href="https://github.com/czy211/wow-toc">Source Code</a>
-        ]]>
-    </description>
-
-    <change-notes>
-        <![CDATA[
-            <h3>v1.0.0</h3>
+            <p>Support for World of Warcraft addon's .toc file.</p>
+            <h3>Features:</h3>
             <ul>
+                <li>Create a new toc file</li>
+                <li>Toc file template</li>
                 <li>Syntax highlighting</li>
-                <li>Code completion</li>
+                <li>Color settings page</li>
+                <li>Annotator</li>
+                <li>Official tag name completion</li>
+                <li>Reference file name completion</li>
+                <li>Go to reference file</li>
+                <li>Rename reference file</li>
+                <li>Find usages</li>
+                <li>Code formatter</li>
+                <li>Code style settings</li>
                 <li>Comment</li>
             </ul>
         ]]>
-    </change-notes>
+    </description>
+
+    <!--<change-notes>
+        <![CDATA[
+        ]]>
+    </change-notes>-->
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for
          description -->
