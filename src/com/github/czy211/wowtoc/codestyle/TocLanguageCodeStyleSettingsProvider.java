@@ -1,6 +1,7 @@
 package com.github.czy211.wowtoc.codestyle;
 
 import com.github.czy211.wowtoc.lang.TocLanguage;
+import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -40,13 +41,7 @@ public class TocLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSetti
     @Nullable
     @Override
     public String getCodeSample(@NotNull SettingsType settingsType) {
-        return "## Interface: 80205\n"
-                + "## Title: WlkUI\n"
-                + "\n"
-                + "## Notes: WlkUI\n"
-                + "ActionBar.lua\n"
-                + "\n"
-                + "Auction.lua";
+        return TocUtil.DEMO_TEXT;
     }
 
     @NotNull

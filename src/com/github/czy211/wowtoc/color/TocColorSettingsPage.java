@@ -2,6 +2,7 @@ package com.github.czy211.wowtoc.color;
 
 import com.github.czy211.wowtoc.highlighter.TocSyntaxHighlighter;
 import com.github.czy211.wowtoc.icon.TocIcon;
+import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
@@ -38,14 +39,7 @@ public class TocColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return "## Interface: 80205\n"
-                + "## Title: WlkUI\n"
-                + "## Version: 2.0.0\n"
-                + "\n"
-                + "# 动作条\n"
-                + "ActionBar.lua\n"
-                + "# 拍卖行\n"
-                + "Auction.lua";
+        return TocUtil.DEMO_TEXT;
     }
 
     @Nullable

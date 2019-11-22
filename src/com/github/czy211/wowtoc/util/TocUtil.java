@@ -8,6 +8,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TocUtil {
+    public static final String DEMO_TEXT = "# This is comment.\n"
+            + "## Interface: 80205\n"
+            + "## Title: WlkUI\n"
+            + "\n"
+            + "## Notes: WlkUI\n"
+            + "ActionBar.lua\n"
+            + "\n"
+            + "Auction.lua";
+
     public static final String[] TAG_NAMES = {"Interface", "Title", "Notes", "Description", "RequiredDeps",
             "Dep", "OptionalDeps", "LoadOnDemand", "LoadWith", "LoadManagers", "SavedVariablesPerCharacter",
             "SavedVariables", "DefaultState", "Secure", "Author", "Version"};
