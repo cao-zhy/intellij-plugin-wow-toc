@@ -3,7 +3,10 @@ package com.github.czy211.wowtoc.annotator;
 import com.github.czy211.wowtoc.psi.TocRefer;
 import com.github.czy211.wowtoc.psi.TocTag;
 import com.github.czy211.wowtoc.psi.impl.TocPsiImplUtil;
+import com.github.czy211.wowtoc.quickfix.CreateFileQuickFix;
+import com.github.czy211.wowtoc.quickfix.RemoveReferQuickFix;
 import com.github.czy211.wowtoc.util.TocUtil;
+import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.util.TextRange;
@@ -32,11 +35,16 @@ public class TocAnnotator implements Annotator {
             Set<String> fileNames = TocUtil.getFileNames(psiElement);
             if (fileName != null) {
                 if (!fileName.matches(TocUtil.REGEX_FILE_NAME)) {
-                    // 文件名不是以 lua 或 xml 结尾，显示错误等级的附注
-                    annotationHolder.createErrorAnnotation(psiElement, "Unresolved file type");
+                    // 文件名不是以 lua 或 xml 结尾，显示错误等级的附注，并添加移除该引用的快速修复选项
+                    annotationHolder.createErrorAnnotation(psiElement, "Unresolved file type").registerFix(
+                            new RemoveReferQuickFix(psiElement));
                 } else if (!fileNames.contains(fileName)) {
                     // 未找到引用文件，显示错误等级的附注
-                    annotationHolder.createErrorAnnotation(psiElement, "Unresolved file");
+                    Annotation annotation = annotationHolder.createErrorAnnotation(psiElement, "Unresolved file");
+                    // 添加创建该引用文件的快速修复选项
+                    annotation.registerFix(new CreateFileQuickFix(fileName));
+                    // 添加移除该引用的快速修复选项
+                    annotation.registerFix(new RemoveReferQuickFix(psiElement));
                 }
             }
         }
