@@ -15,17 +15,20 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class TocAnnotator implements Annotator {
     @Override
     public void annotate(@NotNull PsiElement psiElement, @NotNull AnnotationHolder annotationHolder) {
         if (psiElement instanceof TocTag) {
-            /* 没有标签名或标签名不是官方标签名，则显示警告等级的附注 */
+            // 没有标签名或标签名不是官方标签名，则显示警告等级的附注
             TocTag tag = (TocTag) psiElement;
             TextRange range = TocPsiImplUtil.getKeyRange(tag);
             if (range != null) {
                 String tagName = TocPsiImplUtil.getTagName(tag);
-                if (tagName == null || !tagName.matches(Constants.REGEX_TAG_NAME)) {
+                // 忽略大小写匹配标签名的正则表达式
+                Pattern pattern = Pattern.compile(Constants.REGEX_TAG_NAME, Pattern.CASE_INSENSITIVE);
+                if (tagName == null || !pattern.matcher(tagName).matches()) {
                     annotationHolder.createWarningAnnotation(range, "Unresolved tag name");
                 }
             }
