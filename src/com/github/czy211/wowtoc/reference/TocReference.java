@@ -25,9 +25,11 @@ public class TocReference extends PsiReferenceBase {
     public PsiElement resolve() {
         if (myElement instanceof TocRefer) {
             PsiDirectory directory = myElement.getContainingFile().getParent();
-            if (directory != null) {
-                String fileName = ((TocRefer) myElement).getFileName();
-                if (fileName.matches(TocUtil.REGEX_FILE_NAME)) {
+            String fileName = ((TocRefer) myElement).getFileName();
+            if (fileName.matches(TocUtil.REGEX_FILE_NAME)) {
+                directory = TocUtil.getDirectory(directory, fileName, false);
+                fileName = TocUtil.getFileName(fileName);
+                if (directory != null) {
                     return directory.findFile(fileName);
                 }
             }
