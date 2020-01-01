@@ -1,5 +1,6 @@
 package com.github.czy211.wowtoc.completion;
 
+import com.github.czy211.wowtoc.constant.Constants;
 import com.github.czy211.wowtoc.lang.TocLanguage;
 import com.github.czy211.wowtoc.psi.TocTypes;
 import com.github.czy211.wowtoc.util.TocUtil;
@@ -21,14 +22,14 @@ public class TocCompletionContributor extends CompletionContributor {
                     protected void addCompletions(@NotNull CompletionParameters completionParameters,
                                                   @NotNull ProcessingContext processingContext,
                                                   @NotNull CompletionResultSet completionResultSet) {
-                        for (String tagName : TocUtil.TAG_NAMES) {
+                        for (String tagName : Constants.TAG_NAMES) {
                             completionResultSet.addElement(LookupElementBuilder.create(tagName));
                         }
                         PsiElement psiElement = completionParameters.getOriginalPosition();
                         if (psiElement != null) {
                             String text = psiElement.getText();
                             if (text.startsWith("Title") || text.startsWith("Notes")) {
-                                for (String localization : TocUtil.LOCALIZATION) {
+                                for (String localization : Constants.LOCALIZATION) {
                                     completionResultSet.addElement(LookupElementBuilder.create(text.substring(0, 5)
                                             + "-" + localization));
                                 }

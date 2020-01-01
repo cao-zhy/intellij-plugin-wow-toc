@@ -1,8 +1,8 @@
 package com.github.czy211.wowtoc.color;
 
+import com.github.czy211.wowtoc.constant.Constants;
 import com.github.czy211.wowtoc.highlighter.TocSyntaxHighlighter;
 import com.github.czy211.wowtoc.icon.TocIcon;
-import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
@@ -39,7 +39,7 @@ public class TocColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return TocUtil.DEMO_TEXT;
+        return Constants.DEMO_TEXT;
     }
 
     @Nullable

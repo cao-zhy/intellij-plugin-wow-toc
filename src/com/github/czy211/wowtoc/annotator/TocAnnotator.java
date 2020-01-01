@@ -1,5 +1,6 @@
 package com.github.czy211.wowtoc.annotator;
 
+import com.github.czy211.wowtoc.constant.Constants;
 import com.github.czy211.wowtoc.psi.TocRefer;
 import com.github.czy211.wowtoc.psi.TocTag;
 import com.github.czy211.wowtoc.psi.impl.TocPsiImplUtil;
@@ -24,7 +25,7 @@ public class TocAnnotator implements Annotator {
             TextRange range = TocPsiImplUtil.getKeyRange(tag);
             if (range != null) {
                 String tagName = TocPsiImplUtil.getTagName(tag);
-                if (tagName == null || !tagName.matches(TocUtil.REGEX_TAG_NAME)) {
+                if (tagName == null || !tagName.matches(Constants.REGEX_TAG_NAME)) {
                     annotationHolder.createWarningAnnotation(range, "Unresolved tag name");
                 }
             }
@@ -34,7 +35,7 @@ public class TocAnnotator implements Annotator {
             // 获取同目录下所有 .lua 文件和 .xml 文件
             Set<String> fileNames = TocUtil.getFileNames(psiElement);
             if (fileName != null) {
-                if (!fileName.matches(TocUtil.REGEX_FILE_NAME)) {
+                if (!fileName.matches(Constants.REGEX_FILE_NAME)) {
                     // 文件名不是以 lua 或 xml 结尾，显示错误等级的附注，并添加移除该引用的快速修复选项
                     annotationHolder.createErrorAnnotation(psiElement, "Unresolved file type").registerFix(
                             new RemoveReferQuickFix(psiElement));

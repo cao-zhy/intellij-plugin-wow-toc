@@ -1,5 +1,6 @@
 package com.github.czy211.wowtoc.reference;
 
+import com.github.czy211.wowtoc.constant.Constants;
 import com.github.czy211.wowtoc.psi.TocRefer;
 import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.openapi.util.TextRange;
@@ -26,7 +27,7 @@ public class TocReference extends PsiReferenceBase {
         if (myElement instanceof TocRefer) {
             PsiDirectory directory = myElement.getContainingFile().getParent();
             String fileName = ((TocRefer) myElement).getFileName();
-            if (fileName.matches(TocUtil.REGEX_FILE_NAME)) {
+            if (fileName.matches(Constants.REGEX_FILE_NAME)) {
                 directory = TocUtil.getDirectory(directory, fileName, false);
                 fileName = TocUtil.getFileName(fileName);
                 if (directory != null) {

@@ -1,7 +1,7 @@
 package com.github.czy211.wowtoc.codestyle;
 
+import com.github.czy211.wowtoc.constant.Constants;
 import com.github.czy211.wowtoc.lang.TocLanguage;
-import com.github.czy211.wowtoc.util.TocUtil;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -41,7 +41,7 @@ public class TocLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSetti
     @Nullable
     @Override
     public String getCodeSample(@NotNull SettingsType settingsType) {
-        return TocUtil.DEMO_TEXT;
+        return Constants.DEMO_TEXT;
     }
 
     @NotNull

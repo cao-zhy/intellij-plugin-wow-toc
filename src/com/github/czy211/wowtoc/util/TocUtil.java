@@ -1,5 +1,6 @@
 package com.github.czy211.wowtoc.util;
 
+import com.github.czy211.wowtoc.constant.Constants;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -8,28 +9,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TocUtil {
-    public static final String DEMO_TEXT = "# This is comment.\n"
-            + "## Interface: 80205\n"
-            + "## Title: WlkUI\n"
-            + "\n"
-            + "## Notes: WlkUI\n"
-            + "ActionBar.lua\n"
-            + "\n"
-            + "Auction.lua";
-
-    public static final String[] TAG_NAMES = {"Interface", "Title", "Notes", "Description", "RequiredDeps",
-            "Dep", "OptionalDeps", "LoadOnDemand", "LoadWith", "LoadManagers", "SavedVariablesPerCharacter",
-            "SavedVariables", "DefaultState", "Secure", "Author", "Version"};
-    public static final String[] LOCALIZATION = {"enUS", "enGB", "frFR", "deDE", "esES", "esMX", "itIT", "ptBR", "ruRU",
-            "koKR", "zhTW", "zhCN"};
-
-    public static final String REGEX_LOCALIZATION = "enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN";
-    public static final String REGEX_TAG_NAME = "Interface|Title(-(" + REGEX_LOCALIZATION + "))?|Notes(-("
-            + REGEX_LOCALIZATION + "))?|RequiredDeps|Dependencies|Dep[^: \\n\\f]+|OptionalDeps|LoadOnDemand|LoadWith|"
-            + "LoadManagers|SavedVariables|SavedVariablesPerCharacter|DefaultState|Secure|Author|Version|"
-            + "[Xx]-[^: \\n\\f]+";
-    public static final String REGEX_FILE_NAME = ".*\\.([lL][uU][aA]|[xX][mM][lL])$";
-
     /**
      * 获取 PSI 元素所在文件夹及其子文件夹下的所有文件名
      *
@@ -56,7 +35,7 @@ public class TocUtil {
         PsiFile[] psiFiles = baseDirectory.getFiles();
         for (PsiFile file : psiFiles) {
             String name = file.getName();
-            if (name.matches(REGEX_FILE_NAME)) {
+            if (name.matches(Constants.REGEX_FILE_NAME)) {
                 result.add(dirName + name);
             }
         }
