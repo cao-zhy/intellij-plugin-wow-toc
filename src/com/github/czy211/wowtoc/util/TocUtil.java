@@ -56,7 +56,7 @@ public class TocUtil {
      */
     public static PsiDirectory getDirectory(PsiDirectory baseDirectory, String fileName, boolean createDir) {
         PsiDirectory result = baseDirectory;
-        String[] array = fileName.split("\\\\");
+        String[] array = fileName.split("[/\\\\]");
         for (int i = 0; i < array.length - 1; i++) {
             if (result != null) {
                 PsiDirectory directory = result.findSubdirectory(array[i]);
@@ -77,7 +77,7 @@ public class TocUtil {
      * @return 不包含文件夹名前缀的文件名
      */
     public static String getFileName(String fileName) {
-        String[] array = fileName.split("\\\\");
+        String[] array = fileName.split("[/\\\\]");
         return array[array.length - 1];
     }
 }

@@ -68,8 +68,9 @@ public class TocPsiImplUtil {
         if (node != null) {
             String fileName = node.getText();
             String prefix = "";
-            if (fileName.contains("\\")) {
-                prefix = fileName.substring(0, fileName.lastIndexOf("\\") + 1);
+            if (fileName.contains("\\") || fileName.contains("/")) {
+                int endIndex = Math.max(fileName.lastIndexOf("\\"), fileName.lastIndexOf("/"));
+                prefix = fileName.substring(0, endIndex + 1);
             }
             // 创建新文件名的引用时，文件名应该包含之前的文件夹前缀
             TocRefer refer = TocElementFactory.createRefer(psiElement.getProject(), prefix + newName);

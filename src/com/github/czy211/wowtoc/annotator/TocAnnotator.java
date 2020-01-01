@@ -15,6 +15,7 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TocAnnotator implements Annotator {
@@ -35,14 +36,14 @@ public class TocAnnotator implements Annotator {
         } else if (psiElement instanceof TocRefer) {
             TocRefer refer = (TocRefer) psiElement;
             String fileName = TocPsiImplUtil.getFileName(refer);
-            // 获取同目录下所有 .lua 文件和 .xml 文件
             Set<String> fileNames = TocUtil.getFileNames(psiElement);
             if (fileName != null) {
                 if (!fileName.matches(Constants.REGEX_FILE_NAME)) {
                     // 文件名不是以 lua 或 xml 结尾，显示错误等级的附注，并添加移除该引用的快速修复选项
                     annotationHolder.createErrorAnnotation(psiElement, "Unresolved file type").registerFix(
                             new RemoveReferQuickFix(psiElement));
-                } else if (!fileNames.contains(fileName)) {
+                    // fileNames 中的分隔符是 “\”，需要把 fileName 中的所有 “/” 替换为 “\”
+                } else if (!fileNames.contains(fileName.replaceAll("/", Matcher.quoteReplacement("\\")))) {
                     // 未找到引用文件，显示错误等级的附注
                     Annotation annotation = annotationHolder.createErrorAnnotation(psiElement, "Unresolved file");
                     // 添加创建该引用文件的快速修复选项
