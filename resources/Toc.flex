@@ -14,7 +14,7 @@ import com.intellij.psi.TokenType;
 %eof{  return;
 %eof}
 
-CRLF=[\r|\n|\r\n]
+CRLF=[\r\n]|\r\n
 WHITE_SPACE=[ ]
 // 注释以 “#” 开头，如果大于或等于 2 个字符，则第二个字符不能是 “#”
 END_OF_LINE_COMMENT=#([^#\n\f][^\n\f]*)?

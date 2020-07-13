@@ -15,9 +15,9 @@ import com.intellij.psi.tree.IElementType;
  */
 class TocLexer implements FlexLexer {
 
-    /**
-     * This character denotes the end of file
-     */
+  /**
+   * This character denotes the end of file
+   */
   public static final int YYEOF = -1;
   /* The ZZ_CMAP_Z table has 136 entries */
   static final char[] ZZ_CMAP_Z = zzUnpackCMap(
@@ -33,47 +33,48 @@ class TocLexer implements FlexLexer {
           "\1\0\177\200");
   /* The ZZ_CMAP_A table has 256 entries */
   static final char[] ZZ_CMAP_A = zzUnpackCMap(
-          "\12\0\1\5\1\0\1\4\1\1\22\0\1\2\2\0\1\3\26\0\1\6\101\0\1\1\203\0");
-  /** initial size of the lookahead buffer */
+          "\12\0\1\1\1\0\1\5\1\2\22\0\1\3\2\0\1\4\26\0\1\6\305\0");
+  /**
+   * initial size of the lookahead buffer
+   */
   private static final int ZZ_BUFFERSIZE = 16384;
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
    * ZZ_LEXSTATE[l+1] is the state in the DFA for the lexical state l
-   *                  at the beginning of a line
+   * at the beginning of a line
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int[] ZZ_LEXSTATE = {
-          0, 0, 1, 1, 2,  2,  3, 3
+          0, 0, 1, 1, 2, 2, 3, 3
   };
   private static final String ZZ_ACTION_PACKED_0 =
-          "\4\0\1\1\1\2\1\1\1\3\1\4\1\2\1\4" +
-                  "\2\5\1\6\1\7\2\10\1\11\1\0\1\3\1\12"+
-    "\3\0";
+          "\4\0\1\1\2\2\1\1\1\3\2\4\2\5\1\6" +
+                  "\1\7\2\10\1\11\1\0\1\3\1\12\3\0";
   /**
    * Translates DFA states to action switch labels.
    */
   private static final int[] ZZ_ACTION = zzUnpackAction();
   private static final String ZZ_ROWMAP_PACKED_0 =
           "\0\0\0\7\0\16\0\25\0\34\0\43\0\52\0\61" +
-                  "\0\70\0\77\0\106\0\115\0\124\0\133\0\70\0\142" +
-                  "\0\151\0\160\0\34\0\167\0\70\0\106\0\115\0\142";
+                  "\0\70\0\77\0\106\0\115\0\124\0\133\0\77\0\142" +
+                  "\0\151\0\160\0\34\0\167\0\77\0\106\0\115\0\142";
   /**
    * Translates a state to a row index in the transition table
    */
   private static final int[] ZZ_ROWMAP = zzUnpackRowMap();
   private static final String ZZ_TRANS_PACKED_0 =
-          "\1\5\1\6\1\7\1\10\1\11\1\12\1\5\1\11" +
-                  "\1\12\1\13\2\11\1\12\1\11\1\14\1\15\1\16" +
-                  "\1\14\1\11\1\12\1\17\1\20\1\21\1\22\1\20" +
-                  "\1\11\1\12\1\20\2\5\1\23\1\5\2\0\2\5" +
-                  "\1\6\1\23\1\5\1\0\1\12\3\5\1\7\1\5" +
-                  "\2\0\1\5\3\24\1\25\2\0\1\24\10\0\1\12" +
-                  "\3\0\1\12\2\0\1\12\1\26\2\0\1\12\1\0" +
-                  "\2\14\1\27\1\14\3\0\1\14\1\15\1\27\1\14" +
-                  "\1\0\1\12\2\0\1\12\1\16\2\0\1\12\1\0" +
-                  "\2\20\1\30\1\20\2\0\2\20\1\21\1\30\1\20" +
-                  "\1\0\1\12\1\20\1\0\1\12\1\22\2\0\1\12" +
-                  "\1\0\4\24\2\0\1\24";
+          "\1\5\1\6\1\7\1\10\1\11\1\12\1\5\1\12" +
+                  "\2\6\1\13\3\12\1\14\1\6\1\15\1\16\1\14" +
+                  "\1\12\1\17\1\20\1\6\1\21\1\22\1\20\1\12" +
+                  "\1\20\1\5\1\0\1\5\1\23\1\5\1\0\1\5" +
+                  "\1\0\2\6\4\0\1\5\1\6\1\7\1\23\1\5" +
+                  "\1\0\2\5\1\0\1\5\1\10\1\5\1\0\1\5" +
+                  "\1\24\1\0\2\24\1\25\1\0\1\24\10\0\2\6" +
+                  "\1\26\3\0\1\14\1\0\1\14\1\27\1\14\2\0" +
+                  "\1\14\1\6\1\15\1\27\1\14\3\0\2\6\1\16" +
+                  "\3\0\1\20\1\0\1\20\1\30\1\20\1\0\2\20" +
+                  "\1\6\1\21\1\30\1\20\1\0\1\20\1\0\2\6" +
+                  "\1\22\3\0\1\24\1\0\3\24\1\0\1\24";
   /**
    * The transition table of the DFA
    */
@@ -89,20 +90,22 @@ class TocLexer implements FlexLexer {
           "Error: pushback value was too large"
   };
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-          "\4\0\4\1\1\11\5\1\1\11\3\1\1\0\1\1" +
+          "\4\0\5\1\1\11\4\1\1\11\3\1\1\0\1\1" +
                   "\1\11\3\0";
   /**
    * ZZ_ATTRIBUTE[aState] contains the attributes of state <code>aState</code>
    */
   private static final int[] ZZ_ATTRIBUTE = zzUnpackAttribute();
-  /** the input device */
-  private java.io.Reader zzReader;
+  /**
+   * the input device
+   */
+  private final java.io.Reader zzReader;
   /** the current state of the DFA */
   private int zzState;
   /** the current lexical state */
   private int zzLexicalState = YYINITIAL;
   /** this buffer contains the current text to be matched and is
-   the source of the yytext() string */
+      the source of the yytext() string */
   private CharSequence zzBuffer = "";
   /** the textposition at the last accepting state */
   private int zzMarkedPos;
@@ -111,7 +114,7 @@ class TocLexer implements FlexLexer {
   /** startRead marks the beginning of the yytext() string in the buffer */
   private int zzStartRead;
   /** endRead marks the last character in the buffer, that has been read
-   from input */
+      from input */
   private int zzEndRead;
   /**
    * zzAtBOL == true <=> the scanner is currently at the beginning of a line
@@ -128,17 +131,17 @@ class TocLexer implements FlexLexer {
    * Total runtime size is 1040 bytes
    */
   public static int ZZ_CMAP(int ch) {
-      return ZZ_CMAP_A[ZZ_CMAP_Y[ZZ_CMAP_Z[ch >> 13] | ((ch >> 7) & 0x3f)]|(ch&0x7f)];
+    return ZZ_CMAP_A[ZZ_CMAP_Y[ZZ_CMAP_Z[ch >> 13] | ((ch >> 7) & 0x3f)] | (ch & 0x7f)];
   }
 
-    private static int[] zzUnpackAction() {
-        int[] result = new int[24];
+  private static int[] zzUnpackAction() {
+    int[] result = new int[24];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
-    }
+  }
 
-    private static int zzUnpackAction(String packed, int offset, int[] result) {
+  private static int zzUnpackAction(String packed, int offset, int[] result) {
     int i = 0;       /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -148,16 +151,16 @@ class TocLexer implements FlexLexer {
       do result[j++] = value; while (--count > 0);
     }
     return j;
-    }
+  }
 
-    private static int[] zzUnpackRowMap() {
-        int[] result = new int[24];
+  private static int[] zzUnpackRowMap() {
+    int[] result = new int[24];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
-    }
+  }
 
-    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
+  private static int zzUnpackRowMap(String packed, int offset, int[] result) {
     int i = 0;  /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -166,16 +169,16 @@ class TocLexer implements FlexLexer {
       result[j++] = high | packed.charAt(i++);
     }
     return j;
-    }
+  }
 
-    private static int[] zzUnpackTrans() {
-        int[] result = new int[126];
+  private static int[] zzUnpackTrans() {
+    int[] result = new int[126];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
-    }
+  }
 
-    private static int zzUnpackTrans(String packed, int offset, int[] result) {
+  private static int zzUnpackTrans(String packed, int offset, int[] result) {
     int i = 0;       /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -186,16 +189,16 @@ class TocLexer implements FlexLexer {
       do result[j++] = value; while (--count > 0);
     }
     return j;
-    }
+  }
 
-    private static int[] zzUnpackAttribute() {
-        int[] result = new int[24];
+  private static int[] zzUnpackAttribute() {
+    int[] result = new int[24];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
-    }
+  }
 
-    private static int zzUnpackAttribute(String packed, int offset, int[] result) {
+  private static int zzUnpackAttribute(String packed, int offset, int[] result) {
     int i = 0;       /* index in packed string  */
     int j = offset;  /* index in unpacked array */
     int l = packed.length();
@@ -220,7 +223,7 @@ class TocLexer implements FlexLexer {
   /**
    * Unpacks the compressed character translation table.
    *
-   * @param packed   the packed character translation table
+   * @param packed the packed character translation table
    * @return the unpacked character translation table
    */
   private static char[] zzUnpackCMap(String packed) {
@@ -232,7 +235,7 @@ class TocLexer implements FlexLexer {
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
     while (i < packed.length()) {
-        int count = packed.charAt(i++);
+      int count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
     }
@@ -261,7 +264,7 @@ class TocLexer implements FlexLexer {
    *
    * @return      {@code false}, iff there was new input.
    *
-   * @exception java.io.IOException  if any I/O-Error occurs
+   * @exception   java.io.IOException  if any I/O-Error occurs
    */
   private boolean zzRefill() throws java.io.IOException {
     return true;
@@ -367,7 +370,7 @@ class TocLexer implements FlexLexer {
   private void zzDoEOF() {
     if (!zzEOFDone) {
       zzEOFDone = true;
-    
+
     }
   }
 
@@ -377,7 +380,7 @@ class TocLexer implements FlexLexer {
    * the end of input is encountered or an I/O-Error occurs.
    *
    * @return the next token
-   * @exception java.io.IOException  if any I/O-Error occurs
+   * @exception   java.io.IOException  if any I/O-Error occurs
    */
   public IElementType advance() throws java.io.IOException {
     int zzInput;
@@ -389,9 +392,9 @@ class TocLexer implements FlexLexer {
     int zzEndReadL = zzEndRead;
     CharSequence zzBufferL = zzBuffer;
 
-      int[] zzTransL = ZZ_TRANS;
-      int[] zzRowMapL = ZZ_ROWMAP;
-    int [] zzAttrL = ZZ_ATTRIBUTE;
+    int[] zzTransL = ZZ_TRANS;
+    int[] zzRowMapL = ZZ_ROWMAP;
+    int[] zzAttrL = ZZ_ATTRIBUTE;
 
     while (true) {
       zzMarkedPosL = zzMarkedPos;
@@ -409,7 +412,8 @@ class TocLexer implements FlexLexer {
       }
 
 
-      zzForAction: {
+      zzForAction:
+      {
         while (true) {
 
           if (zzCurrentPosL < zzEndReadL) {
@@ -418,27 +422,25 @@ class TocLexer implements FlexLexer {
           } else if (zzAtEOF) {
             zzInput = YYEOF;
             break zzForAction;
-          }
-          else {
+          } else {
             // store back cached positions
-              zzCurrentPos = zzCurrentPosL;
-            zzMarkedPos   = zzMarkedPosL;
+            zzCurrentPos = zzCurrentPosL;
+            zzMarkedPos = zzMarkedPosL;
             boolean eof = zzRefill();
             // get translated positions and possibly new buffer
-              zzCurrentPosL = zzCurrentPos;
-              zzMarkedPosL = zzMarkedPos;
-              zzBufferL = zzBuffer;
-              zzEndReadL = zzEndRead;
+            zzCurrentPosL = zzCurrentPos;
+            zzMarkedPosL = zzMarkedPos;
+            zzBufferL = zzBuffer;
+            zzEndReadL = zzEndRead;
             if (eof) {
               zzInput = YYEOF;
               break zzForAction;
-            }
-            else {
+            } else {
               zzInput = Character.codePointAt(zzBufferL, zzCurrentPosL/*, zzEndReadL*/);
               zzCurrentPosL += Character.charCount(zzInput);
             }
           }
-            int zzNext = zzTransL[zzRowMapL[zzState] + ZZ_CMAP(zzInput) ];
+          int zzNext = zzTransL[ zzRowMapL[zzState] + ZZ_CMAP(zzInput) ];
           if (zzNext == -1) break zzForAction;
           zzState = zzNext;
 
@@ -446,7 +448,7 @@ class TocLexer implements FlexLexer {
           if ( (zzAttributes & 1) == 1 ) {
             zzAction = zzState;
             zzMarkedPosL = zzCurrentPosL;
-              if ((zzAttributes & 8) == 8) break zzForAction;
+            if ( (zzAttributes & 8) == 8 ) break zzForAction;
           }
 
         }
@@ -462,74 +464,75 @@ class TocLexer implements FlexLexer {
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
-            case 1: {
-                yybegin(WAITING_CRLF);
-                return TocTypes.FILE_NAME;
-            }
-            // fall through
-            case 11:
-                break;
-            case 2: {
-                yybegin(YYINITIAL);
-                return TokenType.WHITE_SPACE;
-            }
-            // fall through
-            case 12:
-                break;
-            case 3: {
-                yybegin(WAITING_CRLF);
-                return TocTypes.COMMENT;
-            }
-            // fall through
-            case 13:
-                break;
-            case 4: {
-                return TokenType.BAD_CHARACTER;
-            }
-            // fall through
-            case 14:
-                break;
-            case 5: {
-                yybegin(WAITING_KEY);
-                return TocTypes.TAG_NAME;
-            }
-            // fall through
-            case 15:
-                break;
-            case 6: {
-                yybegin(WAITING_KEY);
-                return TokenType.WHITE_SPACE;
-            }
-            // fall through
-            case 16:
-                break;
-            case 7: {
-                yybegin(WAITING_VALUE);
-                return TocTypes.SEPARATOR;
-            }
-            // fall through
-            case 17:
-                break;
-            case 8: {
-                yybegin(WAITING_CRLF);
-                return TocTypes.TAG_VALUE;
-            }
-            // fall through
-            case 18:
-                break;
-            case 9: {
-                yybegin(WAITING_VALUE);
-                return TokenType.WHITE_SPACE;
-            }
-            // fall through
-            case 19:
-                break;
-            case 10: {
-                yybegin(WAITING_KEY);
-                return TocTypes.TAG_PREFIX;
-            }
-            // fall through
-          case 20: break;
+          case 1: {
+            yybegin(WAITING_CRLF);
+            return TocTypes.FILE_NAME;
+          }
+          // fall through
+          case 11:
+            break;
+          case 2: {
+            yybegin(YYINITIAL);
+            return TokenType.WHITE_SPACE;
+          }
+          // fall through
+          case 12:
+            break;
+          case 3: {
+            yybegin(WAITING_CRLF);
+            return TocTypes.COMMENT;
+          }
+          // fall through
+          case 13:
+            break;
+          case 4: {
+            return TokenType.BAD_CHARACTER;
+          }
+          // fall through
+          case 14:
+            break;
+          case 5: {
+            yybegin(WAITING_KEY);
+            return TocTypes.TAG_NAME;
+          }
+          // fall through
+          case 15:
+            break;
+          case 6: {
+            yybegin(WAITING_KEY);
+            return TokenType.WHITE_SPACE;
+          }
+          // fall through
+          case 16:
+            break;
+          case 7: {
+            yybegin(WAITING_VALUE);
+            return TocTypes.SEPARATOR;
+          }
+          // fall through
+          case 17:
+            break;
+          case 8: {
+            yybegin(WAITING_CRLF);
+            return TocTypes.TAG_VALUE;
+          }
+          // fall through
+          case 18:
+            break;
+          case 9: {
+            yybegin(WAITING_VALUE);
+            return TokenType.WHITE_SPACE;
+          }
+          // fall through
+          case 19:
+            break;
+          case 10: {
+            yybegin(WAITING_KEY);
+            return TocTypes.TAG_PREFIX;
+          }
+          // fall through
+          case 20:
+            break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
